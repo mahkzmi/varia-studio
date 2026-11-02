@@ -1,0 +1,134 @@
+// CENTRAL CUSTOMIZATION FILE
+// Edit this file to change the brand, copy, links, products, metrics and theme.
+export const siteConfig = {
+  brand: {
+    name: "Varia Studio",
+    mark: "V/",
+    eyebrow: "INDEPENDENT APPLIED AI STUDIO",
+    location: "FROM IRAN · WORKING EVERYWHERE",
+    copyright: "© 2026 Varia Studio. Built with intent."
+  },
+  theme: {
+    background: "#090B09",
+    panel: "#121612",
+    panelRaised: "#171D17",
+    text: "#F0F1E9",
+    muted: "#A0A79A",
+    accent: "#B9CA8B",
+    accentStrong: "#D3DDB4",
+    line: "rgba(226, 235, 215, .12)"
+  },
+  navigation: [
+    { label: "Work", href: "#work" },
+    { label: "Method", href: "#method" },
+    { label: "Studio", href: "#studio" },
+    { label: "Contact", href: "#contact" }
+  ],
+  hero: {
+    tag: "INTELLIGENCE, GROUNDED.",
+    headlineA: "The living world",
+    headlineB: "deserves better",
+    headlineC: "technology.",
+    description: "We turn scientific understanding into practical AI systems for agriculture — from the complexity beneath our feet to the signals visible in the field.",
+    primaryLabel: "Explore selected work",
+    secondaryLabel: "Start a conversation",
+    note: "SOIL · VISION · DATA"
+  },
+  intro: {
+    index: "01 / THE STUDIO",
+    title: "Not AI for its own sake.",
+    highlight: "Intelligence with a place in the real world.",
+    body: "Varia is an independent applied AI studio working at the intersection of agricultural science and software engineering. We build focused tools where domain knowledge matters as much as the model."
+  },
+  products: [
+    {
+      id: "carbon",
+      index: "01",
+      name: "Varia Carbon",
+      discipline: "SOIL INTELLIGENCE",
+      status: "LIVE DEMO",
+      statusTone: "live",
+      short: "Estimate soil organic carbon through environmental and geospatial signals.",
+      problem: "Soil carbon is foundational to soil health, yet useful estimates are often difficult to access at scale.",
+      approach: "A machine-learning workflow combining environmental predictors and soil-related variables to explore spatial patterns in soil organic carbon.",
+      proof: [
+        { value: "0.78", label: "R² · reported model result" },
+        { value: "0.80%", label: "MAE · SOC" },
+        { value: "18.9k", label: "LUCAS records in source dataset" }
+      ],
+      stack: ["Python", "Scikit-learn", "Geospatial data", "Streamlit"],
+      caveat: "Metrics describe the current experimental model and its evaluation setup; they are not a guarantee of field performance.",
+      action: "Open live demo",
+      href: "https://varia-carbon.streamlit.app/",
+      icon: "carbon"
+    },
+    {
+      id: "vision",
+      index: "02",
+      name: "Varia Vision",
+      discipline: "COMPUTER VISION",
+      status: "PILOT-READY",
+      statusTone: "pilot",
+      short: "Detect weeds in field imagery to support more precise crop monitoring.",
+      problem: "Field scouting is repetitive and visual signals can be difficult to process consistently across large areas.",
+      approach: "An object-detection workflow designed to identify crop and weed instances in aerial imagery, with an API-oriented deployment path.",
+      proof: [
+        { value: "0.79", label: "mAP50 · reported result" },
+        { value: "5.2 ms", label: "Inference · Tesla T4" },
+        { value: "YOLOv8n", label: "Detection architecture" }
+      ],
+      stack: ["Python", "YOLO", "Roboflow", "API integration"],
+      caveat: "Reported benchmark results depend on the validation dataset and hardware; field conditions require separate validation.",
+      action: "Explore pilot",
+      href: "https://varia.studio/vision",
+      icon: "vision"
+    },
+    {
+      id: "trait",
+      index: "03",
+      name: "Varia Trait-Bridge",
+      discipline: "GENOMIC INTELLIGENCE",
+      status: "IN DEVELOPMENT",
+      statusTone: "build",
+      short: "Make genomic screening more interpretable through applied machine learning.",
+      problem: "Genomic datasets can be high-dimensional and difficult to translate into transparent screening decisions.",
+      approach: "An emerging research direction focused on interpretable ML workflows for genomic signals and trait-oriented analysis.",
+      proof: [
+        { value: "ML", label: "Core methodology" },
+        { value: "Traits", label: "Research focus" },
+        { value: "Explainable", label: "Design principle" }
+      ],
+      stack: ["Machine learning", "Genomic data", "Interpretability"],
+      caveat: "This product is in development. No validated performance claims are presented at this stage.",
+      action: "Discuss research",
+      href: "mailto:mah.kzmi21@gmail.com?subject=Varia%20Trait-Bridge",
+      icon: "trait"
+    }
+  ],
+  method: [
+    { n: "01", title: "Understand the domain", text: "Start with the scientific and operational context — not with a model looking for a problem." },
+    { n: "02", title: "Build the evidence", text: "Work with relevant data, explicit assumptions, and evaluation that makes limitations visible." },
+    { n: "03", title: "Engineer the tool", text: "Turn validated workflows into usable software, APIs, and decision-support interfaces." },
+    { n: "04", title: "Test in context", text: "Treat deployment and field validation as part of the product, not as an afterthought." }
+  ],
+  capabilities: ["Soil & environmental intelligence", "Computer vision", "Applied machine learning", "Backend & API engineering", "Geospatial data workflows", "Research-to-product translation"],
+  founder: {
+    name: "Mahdieh Kazemi",
+    role: "FOUNDER · SOIL SCIENCE × SOFTWARE",
+    statement: "I work where living systems meet engineered systems.",
+    bio: "My background brings together soil science, agricultural data, backend development, and applied machine learning. Varia Studio is the space where I turn that intersection into focused, testable products."
+  },
+  contact: {
+    title: "Have a real problem",
+    titleAccent: " worth solving?",
+    description: "For pilots, research collaborations, product development, or technical conversations — tell me what you are working on.",
+    email: "mah.kzmi21@gmail.com",
+    linkedin: "https://www.linkedin.com/",
+    x: "https://x.com/thevaria_studio",
+    handle: "@thevaria_studio"
+  },
+  footer: {
+    note: "Small by design. Serious about the work.",
+    links: [{ label: "Email", href: "mailto:mah.kzmi21@gmail.com" }, { label: "X", href: "https://x.com/thevaria_studio" }]
+  }
+};
