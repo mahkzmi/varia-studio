@@ -80,7 +80,7 @@ export const siteConfig = {
       stack: ["Python", "YOLO", "Roboflow", "API integration"],
       caveat: "Reported benchmark results depend on the validation dataset and hardware; field conditions require separate validation.",
       action: "Explore pilot",
-      href: "https://varia.studio/vision",
+      href: "mailto:mah.kzmi21@gmail.com?subject=Varia%20Vision%20Pilot%20Inquiry",
       icon: "vision"
     },
     {
@@ -123,7 +123,7 @@ export const siteConfig = {
     titleAccent: " worth solving?",
     description: "For pilots, research collaborations, product development, or technical conversations — tell me what you are working on.",
     email: "mah.kzmi21@gmail.com",
-    linkedin: "https://www.linkedin.com/",
+    linkedin: "https://www.linkedin.com/in/mahdieh-kazemi-505bab319",
     x: "https://x.com/thevaria_studio",
     handle: "@thevaria_studio"
   },
