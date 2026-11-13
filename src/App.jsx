@@ -49,7 +49,7 @@ function DetectionPreview() {
         <span className="service-kicker">COMPUTER VISION FOR AGRICULTURE</span>
         <strong>Varia Vision</strong>
         <p>Explore the inference service and its API documentation.</p>
-        <a className="button button-primary service-open-button" href="https://variavision-1.onrender.com/" target="_blank" rel="noreferrer">Open Varia Vision <ArrowUpRight size={15}/></a>
+        <a className="button button-primary service-open-button" href="https://variavision-1.onrender.com/docs" target="_blank" rel="noreferrer">Open Varia Vision <ArrowUpRight size={15}/></a>
       </div>
     </div>
     <div className="preview-legend"><span><i className="legend-weed" /> Weed detection prototype</span><span className="preview-disclaimer">Experimental · Human review required</span></div>
