@@ -82,7 +82,7 @@ function DetectionPreview() {
       const wakeDeadline = Date.now() + 90000;
       while (Date.now() < wakeDeadline) {
         try {
-          const health = await fetch("https://variavision-1.onrender.com/health", {
+          const health = await fetch("/api/vision/health", {
             method: "GET",
             cache: "no-store"
           });
@@ -102,7 +102,7 @@ function DetectionPreview() {
       setProgressMessage("Running weed detection…");
       const formData = new FormData();
       formData.append("file", inferenceFile);
-      const response = await fetch("https://variavision-1.onrender.com/detect", {
+      const response = await fetch("/api/vision/detect", {
         method: "POST",
         body: formData
       });
