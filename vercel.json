@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/vision/:path*",
+      "destination": "https://variavision-1.onrender.com/:path*"
+    }
+  ]
+}
