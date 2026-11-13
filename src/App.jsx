@@ -67,13 +67,18 @@ function DetectionPreview() {
     <div className={"vision-demo-stage" + (previewUrl ? " has-image" : "")}>
       {previewUrl ? <>
         <img className="vision-demo-image" src={previewUrl} alt="Selected field imagery" onLoad={(event) => setImageSize({width:event.currentTarget.naturalWidth,height:event.currentTarget.naturalHeight})} />
-        {imageSize && status === "done" && <svg className="vision-overlay" viewBox={"0 0 " + imageSize.width + " " + imageSize.height} preserveAspectRatio="none" role="img" aria-label="Model detection boxes">
+        {imageSize && status === "done" && <svg className="vision-overlay" viewBox={"0 0 " + imageSize.width + " " + imageSize.height} preserveAspectRatio="xMidYMid meet" role="img" aria-label="Model detection boxes">
           {detections.map((detection,index) => {
             const box = detection.bbox || [0,0,0,0];
             const kind = String(detection.class || "").toLowerCase();
             const stroke = kind.includes("weed") ? "#e3b56f" : kind.includes("crop") ? "#b7ce8b" : "#8fb6df";
             const x = Number(box[0]), y = Number(box[1]), width = Number(box[2]) - x, height = Number(box[3]) - y;
-            return <g key={index}><rect x={x} y={y} width={width} height={height} fill="none" stroke={stroke} strokeWidth={Math.max(imageSize.width / 350, 2)} /><rect x={x} y={Math.max(0,y-24)} width={Math.max(78, String(detection.class || "object").length*8+42)} height="23" fill="#080b09" fillOpacity=".9" /><text x={x+6} y={Math.max(16,y-8)} fill={stroke} fontSize={Math.max(imageSize.width/90,12)} fontFamily="monospace">{String(detection.class || "object").toUpperCase()} {Math.round((Number(detection.confidence)||0)*100)}%</text></g>;
+            const label = String(detection.class || "object").toUpperCase() + " " + Math.round((Number(detection.confidence)||0)*100) + "%";
+            const fontSize = Math.max(imageSize.width / 90, 12);
+            const labelHeight = Math.max(imageSize.height * 0.04, 28);
+            const labelWidth = Math.max(imageSize.width * 0.13, label.length * fontSize * 0.65 + 12);
+            const labelY = Math.max(0, y - labelHeight);
+            return <g key={index}><rect x={x} y={y} width={width} height={height} fill="none" stroke={stroke} strokeWidth={Math.max(imageSize.width / 350, 2)} /><rect x={x} y={labelY} width={labelWidth} height={labelHeight} fill="#080b09" fillOpacity=".9" /><text x={x+6} y={labelY+labelHeight*0.7} fill={stroke} fontSize={fontSize} fontFamily="monospace">{label}</text></g>;
           })}
         </svg>}
       </> : <div className="vision-demo-empty"><ScanLine size={30}/><strong>Your field image goes here</strong><span>Upload an RGB aerial image to request a real model inference</span></div>}
