@@ -25,13 +25,13 @@ export const siteConfig = {
     { label: "Contact", href: "#contact" }
   ],
   hero: {
-    tag: "INTELLIGENCE, GROUNDED.",
-    headlineA: "The living world",
-    headlineB: "deserves better",
-    headlineC: "technology.",
-    description: "We turn scientific understanding into practical AI systems for agriculture — from the complexity beneath our feet to the signals visible in the field.",
-    primaryLabel: "Explore selected work",
-    secondaryLabel: "Start a conversation",
+    tag: "AGRICULTURAL COMPUTER VISION · FIELD IMAGE EVALUATION", 
+    headlineA: "See the field", 
+    headlineB: "with greater", 
+    headlineC: "clarity.", 
+    description: "Varia Vision is an experimental crop-and-weed detection system for aerial imagery. We work with your field images to assess detection quality, document limitations, and determine whether a focused pilot makes sense.", 
+    primaryLabel: "Discuss a Vision evaluation", 
+    secondaryLabel: "Explore the approach", 
     note: "SOIL · VISION · DATA"
   },
   intro: {
@@ -54,7 +54,7 @@ export const siteConfig = {
       proof: [
         { value: "0.78", label: "R² · reported model result" },
         { value: "0.80%", label: "MAE · SOC" },
-        { value: "18.9k", label: "LUCAS records in source dataset" }
+        { value: "18,984", label: "training samples" }
       ],
       stack: ["Python", "Scikit-learn", "Geospatial data", "Streamlit"],
       caveat: "Metrics describe the current experimental model and its evaluation setup; they are not a guarantee of field performance.",
@@ -67,20 +67,20 @@ export const siteConfig = {
       index: "02",
       name: "Varia Vision",
       discipline: "COMPUTER VISION",
-      status: "PILOT-READY",
+      status: "BENCHMARKED PROTOTYPE", 
       statusTone: "pilot",
-      short: "Detect weeds in field imagery to support more precise crop monitoring.",
-      problem: "Field scouting is repetitive and visual signals can be difficult to process consistently across large areas.",
-      approach: "An object-detection workflow designed to identify crop and weed instances in aerial imagery, with an API-oriented deployment path.",
+      short: "Evaluate crop and weed detection on your own aerial field imagery.", 
+      problem: "Teams collecting aerial imagery need to know whether automated crop and weed detection is reliable enough for their specific fields and image conditions.", 
+      approach: "A bounded evaluation using customer-provided imagery to inspect detections, confidence scores, and failure cases before discussing any wider deployment.", 
       proof: [
-        { value: "0.79", label: "mAP50 · reported result" },
-        { value: "5.2 ms", label: "Inference · Tesla T4" },
-        { value: "YOLOv8n", label: "Detection architecture" }
+        { value: "0.788", label: "mAP50 · internal validation" }, 
+        { value: "5.2 ms", label: "Inference · T4 benchmark" }, 
+        { value: "YOLOv8n", label: "Model architecture" }
       ],
       stack: ["Python", "YOLO", "Roboflow", "API integration"],
-      caveat: "Reported benchmark results depend on the validation dataset and hardware; field conditions require separate validation.",
-      action: "Explore pilot",
-      href: "mailto:mah.kzmi21@gmail.com?subject=Varia%20Vision%20Pilot%20Inquiry",
+      caveat: "These are internal benchmark results, not independent or field validation. Performance on your imagery must be evaluated separately; no field-accuracy guarantee is implied.", 
+      action: "Request an evaluation", 
+      href: "mailto:mah.kzmi21@gmail.com?subject=Varia%20Vision%20Image%20Evaluation", 
       icon: "vision"
     },
     {
@@ -119,10 +119,10 @@ export const siteConfig = {
     bio: "My background brings together soil science, agricultural data, backend development, and applied machine learning. Varia Studio is the space where I turn that intersection into focused, testable products."
   },
   contact: {
-    title: "Have a real problem",
-    titleAccent: " worth solving?",
-    description: "For pilots, research collaborations, product development, or technical conversations — tell me what you are working on.",
-    email: "mah.kzmi21@gmail.com",
+    title: "Have field imagery", 
+    titleAccent: " worth evaluating?", 
+    description: "Tell us about your drone imagery, crops, geography, and the decision you want to improve. We can scope a paid evaluation before discussing deployment.", 
+    email: "mah.kzmi21@gmail.com", 
     linkedin: "https://www.linkedin.com/in/mahdieh-kazemi-505bab319",
     x: "https://x.com/thevaria_studio",
     handle: "@thevaria_studio"
