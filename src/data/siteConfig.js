@@ -54,7 +54,7 @@ export const siteConfig = {
       proof: [
         { value: "0.78", label: "R² · reported model result" },
         { value: "0.80%", label: "MAE · SOC" },
-        { value: "18.9k", label: "LUCAS records in source dataset" }
+        { value: "18,984", label: "training samples" }
       ],
       stack: ["Python", "Scikit-learn", "Geospatial data", "Streamlit"],
       caveat: "Metrics describe the current experimental model and its evaluation setup; they are not a guarantee of field performance.",
