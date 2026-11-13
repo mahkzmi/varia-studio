@@ -40,6 +40,7 @@ function DetectionPreview() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
   const [imageSize, setImageSize] = useState(null);
+  const [progressMessage, setProgressMessage] = useState("Preparing image…");
 
   useEffect(() => () => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -65,6 +66,7 @@ function DetectionPreview() {
     setResult(null);
     setError("");
     setStatus("loading");
+    setProgressMessage("Preparing image…");
 
     try {
       const inferenceFile = await prepareImageForInference(file);
@@ -72,6 +74,32 @@ function DetectionPreview() {
         throw new Error("The prepared image is still larger than the 10 MB service limit.");
       }
       setPreviewUrl(URL.createObjectURL(inferenceFile));
+
+      // Render's free instance sleeps after inactivity. Wake it and wait for
+      // the model-backed API to become healthy before sending the image.
+      setProgressMessage("Waking the inference service…");
+      let apiReady = false;
+      const wakeDeadline = Date.now() + 90000;
+      while (Date.now() < wakeDeadline) {
+        try {
+          const health = await fetch("https://variavision-1.onrender.com/health", {
+            method: "GET",
+            cache: "no-store"
+          });
+          if (health.ok) {
+            apiReady = true;
+            break;
+          }
+        } catch (_) {
+          // A sleeping Render instance may reset the first connection.
+        }
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+      }
+      if (!apiReady) {
+        throw new Error("The inference service is still starting. Please try again in a minute.");
+      }
+
+      setProgressMessage("Running weed detection…");
       const formData = new FormData();
       formData.append("file", inferenceFile);
       const response = await fetch("https://variavision-1.onrender.com/detect", {
@@ -112,7 +140,7 @@ function DetectionPreview() {
           })}
         </svg>}
       </> : <div className="vision-demo-empty"><ScanLine size={30}/><strong>Your field image goes here</strong><span>Upload an RGB aerial image to request a real model inference</span></div>}
-      {status === "loading" && <div className="vision-demo-loading"><span className="demo-spinner"/>Running inference…</div>}
+      {status === "loading" && <div className="vision-demo-loading"><span className="demo-spinner"/>{progressMessage}</div>}
     </div>
     <div className="vision-demo-controls">
       <label className="vision-upload-button">{previewUrl ? "Run another image" : "Choose an image"} <ArrowUpRight size={14}/><input type="file" accept="image/*" onChange={onFileChange}/></label>
