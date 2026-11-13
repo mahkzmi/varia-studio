@@ -1,5 +1,5 @@
 import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronDown, CircleDot, Cpu, Crosshair, Database, Layers3, Linkedin, Mail, Menu, ScanLine, ShieldCheck, Sprout, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const email = "mah.kzmi21@gmail.com";
 const linkedin = "https://www.linkedin.com/in/mahdieh-kazemi-505bab319/";
@@ -35,125 +35,25 @@ async function prepareImageForInference(file) {
 }
 
 function DetectionPreview() {
-  const [previewUrl, setPreviewUrl] = useState("");
-  const [status, setStatus] = useState("idle");
-  const [result, setResult] = useState(null);
-  const [error, setError] = useState("");
-  const [imageSize, setImageSize] = useState(null);
-  const [progressMessage, setProgressMessage] = useState("Preparing image…");
-
-  useEffect(() => () => {
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
-  }, [previewUrl]);
-
-  const onFileChange = async (event) => {
-    const file = event.target.files && event.target.files[0];
-    event.target.value = "";
-    if (!file) return;
-    if (!file.type || !file.type.startsWith("image/")) {
-      setError("Please choose a supported image file.");
-      setStatus("error");
-      return;
-    }
-    if (file.size > 10 * 1024 * 1024) {
-      setError("This demo accepts images up to 10 MB.");
-      setStatus("error");
-      return;
-    }
-
-    setPreviewUrl("");
-    setImageSize(null);
-    setResult(null);
-    setError("");
-    setStatus("loading");
-    setProgressMessage("Preparing image…");
-
-    try {
-      const inferenceFile = await prepareImageForInference(file);
-      if (inferenceFile.size > 10 * 1024 * 1024) {
-        throw new Error("The prepared image is still larger than the 10 MB service limit.");
-      }
-      setPreviewUrl(URL.createObjectURL(inferenceFile));
-
-      // Render's free instance sleeps after inactivity. Wake it and wait for
-      // the model-backed API to become healthy before sending the image.
-      setProgressMessage("Waking the inference service…");
-      let apiReady = false;
-      const wakeDeadline = Date.now() + 90000;
-      while (Date.now() < wakeDeadline) {
-        try {
-          const health = await fetch("/api/vision/health", {
-            method: "GET",
-            cache: "no-store"
-          });
-          if (health.ok) {
-            apiReady = true;
-            break;
-          }
-        } catch (_) {
-          // A sleeping Render instance may reset the first connection.
-        }
-        await new Promise((resolve) => setTimeout(resolve, 3000));
-      }
-      if (!apiReady) {
-        throw new Error("The inference service is still starting. Please try again in a minute.");
-      }
-
-      setProgressMessage("Running weed detection…");
-      const formData = new FormData();
-      formData.append("file", inferenceFile);
-      const response = await fetch("/api/vision/detect", {
-        method: "POST",
-        body: formData
-      });
-      const payload = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        throw new Error(payload.detail || ("The inference request failed (" + response.status + ")."));
-      }
-      setResult(payload);
-      setStatus("done");
-    } catch (requestError) {
-      setError(requestError.message || "The model could not process this image. Please try again.");
-      setStatus("error");
-    }
-  };
-
-  const detections = result && Array.isArray(result.detections) ? result.detections : [];
-
-  return <div className="vision-demo" aria-label="Live Varia Vision image evaluation demo">
-    <div className="preview-top"><span><i className="live-dot" /> VARIA VISION / LIVE INFERENCE</span><span>EXPERIMENTAL</span></div>
-    <div className={"vision-demo-stage" + (previewUrl ? " has-image" : "")}>
-      {previewUrl ? <>
-        <img className="vision-demo-image" src={previewUrl} alt="Selected field imagery" onLoad={(event) => setImageSize({width:event.currentTarget.naturalWidth,height:event.currentTarget.naturalHeight})} />
-        {imageSize && status === "done" && <svg className="vision-overlay" viewBox={"0 0 " + imageSize.width + " " + imageSize.height} preserveAspectRatio="xMidYMid meet" role="img" aria-label="Model detection boxes">
-          {detections.map((detection,index) => {
-            const box = detection.bbox || [0,0,0,0];
-            const kind = String(detection.class || "").toLowerCase();
-            const stroke = kind.includes("weed") ? "#e3b56f" : kind.includes("crop") ? "#b7ce8b" : "#8fb6df";
-            const x = Number(box[0]), y = Number(box[1]), width = Number(box[2]) - x, height = Number(box[3]) - y;
-            const label = String(detection.class || "object").toUpperCase() + " " + Math.round((Number(detection.confidence)||0)*100) + "%";
-            const fontSize = Math.max(imageSize.width / 90, 12);
-            const labelHeight = Math.max(imageSize.height * 0.04, 28);
-            const labelWidth = Math.max(imageSize.width * 0.13, label.length * fontSize * 0.65 + 12);
-            const labelY = Math.max(0, y - labelHeight);
-            return <g key={index}><rect x={x} y={y} width={width} height={height} fill="none" stroke={stroke} strokeWidth={Math.max(imageSize.width / 350, 2)} /><rect x={x} y={labelY} width={labelWidth} height={labelHeight} fill="#080b09" fillOpacity=".9" /><text x={x+6} y={labelY+labelHeight*0.7} fill={stroke} fontSize={fontSize} fontFamily="monospace">{label}</text></g>;
-          })}
-        </svg>}
-      </> : <div className="vision-demo-empty"><ScanLine size={30}/><strong>Your field image goes here</strong><span>Upload an RGB aerial image to request a real model inference</span></div>}
-      {status === "loading" && <div className="vision-demo-loading"><span className="demo-spinner"/>{progressMessage}</div>}
+  return <div className="vision-demo" aria-label="Varia Vision service preview">
+    <div className="preview-top"><span><i className="live-dot" /> VARIA VISION / INFERENCE API</span><span>PROTOTYPE</span></div>
+    <div className="vision-demo-stage vision-service-stage">
+      <div className="vision-service-art">
+        <div className="service-grid-lines" />
+        <div className="service-scan-ring"><ScanLine size={54}/></div>
+        <span className="service-coordinate service-coordinate-a">RGB / AERIAL</span>
+        <span className="service-coordinate service-coordinate-b">WEED CLASS</span>
+        <span className="service-coordinate service-coordinate-c">MODEL · ONNX</span>
+      </div>
+      <div className="vision-service-copy">
+        <span className="service-kicker">COMPUTER VISION FOR AGRICULTURE</span>
+        <strong>Varia Vision</strong>
+        <p>Explore the inference service and its API documentation.</p>
+        <a className="button button-primary service-open-button" href="https://variavision-1.onrender.com/" target="_blank" rel="noreferrer">Open Varia Vision <ArrowUpRight size={15}/></a>
+      </div>
     </div>
-    <div className="vision-demo-controls">
-      <label className="vision-upload-button">{previewUrl ? "Run another image" : "Choose an image"} <ArrowUpRight size={14}/><input type="file" accept="image/*" onChange={onFileChange}/></label>
-      <span>JPG · PNG · WEBP · max 10 MB · optimized before upload</span>
-    </div>
-    {status === "done" && <div className="vision-result">
-      <div className="vision-result-head"><strong>MODEL RESPONSE</strong><span>{result.detections_count} detections returned</span></div>
-      {detections.length ? <div className="vision-detection-list">{detections.map((detection,index)=><div key={index}><span className={String(detection.class || "").toLowerCase().includes("weed") ? "detection-weed" : "detection-other"}>{String(detection.class || "object").toUpperCase()}</span><strong>{Math.round((Number(detection.confidence)||0)*100)}%</strong></div>)}</div> : <p className="vision-result-note">No detections returned at the current confidence threshold (0.25). This does not establish that weeds or crops are absent.</p>}
-    </div>}
-    {status === "error" && <p className="vision-error" role="alert">{error}</p>}
-    <div className="preview-legend"><span><i className="legend-weed" /> Weed class</span><span className="preview-disclaimer">Prototype · Human review required</span></div>
-    <div className="preview-bottom"><span>RGB IMAGE INPUT</span><span>OUTPUT IS NOT FIELD-VALIDATED</span></div>
-    <p className="vision-privacy-note">Images are sent to the inference API for processing. Do not upload confidential or sensitive imagery.</p>
+    <div className="preview-legend"><span><i className="legend-weed" /> Weed detection prototype</span><span className="preview-disclaimer">Experimental · Human review required</span></div>
+    <div className="preview-bottom"><span>API SERVICE</span><span>FIELD VALIDATION REQUIRED</span></div>
   </div>;
 }
 function Navbar() {
@@ -173,7 +73,7 @@ function Hero() {
       <div className="eyebrow"><span className="eyebrow-mark" /> APPLIED AI FOR AGRICULTURE <span className="eyebrow-line" /></div>
       <p className="hero-label">AERIAL IMAGERY → FIELD-LEVEL INSIGHT</p>
       <h1>Make every field image <em>more useful.</em></h1>
-      <p className="hero-lead">Evaluate weed detection on your own drone imagery — before committing to a larger workflow.</p>
+      <p className="hero-lead">Explore the Varia Vision inference service and discuss a focused evaluation for your aerial imagery.</p>
       <div className="hero-actions"><a className="button button-primary" href="#evaluation">Explore a paid evaluation <ArrowUpRight size={17}/></a><a className="text-action" href="#approach">See how it works <ArrowDownRight size={16}/></a></div>
       <div className="hero-proofline"><span><Check size={14}/> Customer-image evaluation</span><span><Check size={14}/> Transparent limitations</span><span><Check size={14}/> Scoped before work begins</span></div>
     </div>
