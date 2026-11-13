@@ -22,8 +22,8 @@ export default function Hero() {
         <h1>{c.hero.headlineA}<br />{c.hero.headlineB}<br /><em>{c.hero.headlineC}</em></h1>
         <p className="hero-description">{c.hero.description}</p>
         <div className="mt-9 flex flex-wrap items-center gap-3">
-          <a href="#work" className="button-primary">{c.hero.primaryLabel}<ArrowUpRight size={16} /></a>
-          <a href="#contact" className="button-quiet">{c.hero.secondaryLabel}<ArrowUpRight size={15} /></a>
+          <a href="#work" className="button-primary" href="#contact">{c.hero.primaryLabel}<ArrowUpRight size={16} /></a>
+          <a href="#contact" className="button-quiet" href="#work">{c.hero.secondaryLabel}<ArrowUpRight size={15} /></a>
         </div>
         <div className="hero-footnote"><span className="pulse-dot" /> {c.brand.location}</div>
       </div>
