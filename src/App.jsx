@@ -1,5 +1,5 @@
 import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronDown, CircleDot, Cpu, Crosshair, Database, Layers3, Linkedin, Mail, Menu, ScanLine, ShieldCheck, Sprout, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const email = "mah.kzmi21@gmail.com";
 const linkedin = "https://www.linkedin.com/in/mahdieh-kazemi-505bab319/";
@@ -10,21 +10,89 @@ function Brand() {
 }
 
 function DetectionPreview() {
-  return <div className="vision-preview" aria-label="Illustrative crop and weed detection interface">
-    <div className="preview-top"><span><i className="live-dot" /> VISION / IMAGE REVIEW</span><span>ILLUSTRATIVE UI</span></div>
-    <div className="field-image">
-      <div className="field-row row-one" /><div className="field-row row-two" /><div className="field-row row-three" /><div className="field-row row-four" />
-      <div className="detection-box weed box-a"><b>WEED</b><small>0.91</small></div>
-      <div className="detection-box crop box-b"><b>CROP</b><small>0.96</small></div>
-      <div className="detection-box weed box-c"><b>WEED</b><small>0.84</small></div>
-      <div className="detection-box crop box-d"><b>CROP</b><small>0.89</small></div>
-      <div className="scan-line" />
+  const [previewUrl, setPreviewUrl] = useState("");
+  const [status, setStatus] = useState("idle");
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState("");
+  const [imageSize, setImageSize] = useState(null);
+
+  useEffect(() => () => {
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+  }, [previewUrl]);
+
+  const onFileChange = async (event) => {
+    const file = event.target.files && event.target.files[0];
+    event.target.value = "";
+    if (!file) return;
+    if (!file.type || !file.type.startsWith("image/")) {
+      setError("Please choose a supported image file.");
+      setStatus("error");
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      setError("This demo accepts images up to 10 MB.");
+      setStatus("error");
+      return;
+    }
+
+    setPreviewUrl(URL.createObjectURL(file));
+    setImageSize(null);
+    setResult(null);
+    setError("");
+    setStatus("loading");
+
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      const response = await fetch("https://variavision-1.onrender.com/detect", {
+        method: "POST",
+        body: formData
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload.detail || ("The inference request failed (" + response.status + ")."));
+      }
+      setResult(payload);
+      setStatus("done");
+    } catch (requestError) {
+      setError(requestError.message || "The model could not process this image. Please try again.");
+      setStatus("error");
+    }
+  };
+
+  const detections = result && Array.isArray(result.detections) ? result.detections : [];
+
+  return <div className="vision-demo" aria-label="Live Varia Vision image evaluation demo">
+    <div className="preview-top"><span><i className="live-dot" /> VARIA VISION / LIVE INFERENCE</span><span>EXPERIMENTAL</span></div>
+    <div className={"vision-demo-stage" + (previewUrl ? " has-image" : "")}>
+      {previewUrl ? <>
+        <img className="vision-demo-image" src={previewUrl} alt="Selected field imagery" onLoad={(event) => setImageSize({width:event.currentTarget.naturalWidth,height:event.currentTarget.naturalHeight})} />
+        {imageSize && status === "done" && <svg className="vision-overlay" viewBox={"0 0 " + imageSize.width + " " + imageSize.height} preserveAspectRatio="none" role="img" aria-label="Model detection boxes">
+          {detections.map((detection,index) => {
+            const box = detection.bbox || [0,0,0,0];
+            const kind = String(detection.class || "").toLowerCase();
+            const stroke = kind.includes("weed") ? "#e3b56f" : kind.includes("crop") ? "#b7ce8b" : "#8fb6df";
+            const x = Number(box[0]), y = Number(box[1]), width = Number(box[2]) - x, height = Number(box[3]) - y;
+            return <g key={index}><rect x={x} y={y} width={width} height={height} fill="none" stroke={stroke} strokeWidth={Math.max(imageSize.width / 350, 2)} /><rect x={x} y={Math.max(0,y-24)} width={Math.max(78, String(detection.class || "object").length*8+42)} height="23" fill="#080b09" fillOpacity=".9" /><text x={x+6} y={Math.max(16,y-8)} fill={stroke} fontSize={Math.max(imageSize.width/90,12)} fontFamily="monospace">{String(detection.class || "object").toUpperCase()} {Math.round((Number(detection.confidence)||0)*100)}%</text></g>;
+          })}
+        </svg>}
+      </> : <div className="vision-demo-empty"><ScanLine size={30}/><strong>Your field image goes here</strong><span>Upload an RGB aerial image to request a real model inference</span></div>}
+      {status === "loading" && <div className="vision-demo-loading"><span className="demo-spinner"/>Running inference…</div>}
     </div>
-    <div className="preview-legend"><span><i className="legend-crop" /> Crop detection</span><span><i className="legend-weed" /> Weed detection</span><span className="preview-disclaimer">Conceptual illustration — not a customer result</span></div>
-    <div className="preview-bottom"><span>RGB AERIAL IMAGERY</span><span>MODEL OUTPUT · REVIEW REQUIRED</span></div>
+    <div className="vision-demo-controls">
+      <label className="vision-upload-button">{previewUrl ? "Run another image" : "Choose an image"} <ArrowUpRight size={14}/><input type="file" accept="image/*" onChange={onFileChange}/></label>
+      <span>JPG · PNG · WEBP · max 10 MB</span>
+    </div>
+    {status === "done" && <div className="vision-result">
+      <div className="vision-result-head"><strong>MODEL RESPONSE</strong><span>{result.detections_count} detections returned</span></div>
+      {detections.length ? <div className="vision-detection-list">{detections.map((detection,index)=><div key={index}><span className={String(detection.class || "").toLowerCase().includes("weed") ? "detection-weed" : "detection-crop"}>{String(detection.class || "object").toUpperCase()}</span><strong>{Math.round((Number(detection.confidence)||0)*100)}%</strong></div>)}</div> : <p className="vision-result-note">No detections returned at the current confidence threshold (0.25). This does not establish that weeds or crops are absent.</p>}
+    </div>}
+    {status === "error" && <p className="vision-error" role="alert">{error}</p>}
+    <div className="preview-legend"><span><i className="legend-crop" /> Crop class</span><span><i className="legend-weed" /> Weed class</span><span className="preview-disclaimer">Prototype · Human review required</span></div>
+    <div className="preview-bottom"><span>RGB IMAGE INPUT</span><span>OUTPUT IS NOT FIELD-VALIDATED</span></div>
+    <p className="vision-privacy-note">Images are sent to the inference API for processing. Do not upload confidential or sensitive imagery.</p>
   </div>;
 }
-
 function Navbar() {
   const [open, setOpen] = useState(false);
   const links = [["The approach", "#approach"], ["Evaluation", "#evaluation"], ["Studio", "#studio"]];
