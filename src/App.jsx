@@ -9,6 +9,31 @@ function Brand() {
   return <a className="brand" href="#top" aria-label="Varia Studio home"><span className="brand-symbol">V<span>.</span></span><span>VARIA<span className="brand-light"> STUDIO</span></span></a>;
 }
 
+async function prepareImageForInference(file) {
+  const bitmap = await createImageBitmap(file);
+  try {
+    const maxSide = 1600;
+    const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
+    const width = Math.max(1, Math.round(bitmap.width * scale));
+    const height = Math.max(1, Math.round(bitmap.height * scale));
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const context = canvas.getContext("2d", { alpha: false });
+    if (!context) throw new Error("Your browser could not prepare this image.");
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, width, height);
+    context.drawImage(bitmap, 0, 0, width, height);
+    const blob = await new Promise((resolve, reject) => {
+      canvas.toBlob((value) => value ? resolve(value) : reject(new Error("Image compression failed.")), "image/jpeg", 0.82);
+    });
+    const baseName = file.name.replace(/\\.[^.]+$/, "") || "field-image";
+    return new File([blob], baseName + ".jpg", { type: "image/jpeg", lastModified: Date.now() });
+  } finally {
+    bitmap.close();
+  }
+}
+
 function DetectionPreview() {
   const [previewUrl, setPreviewUrl] = useState("");
   const [status, setStatus] = useState("idle");
@@ -35,15 +60,20 @@ function DetectionPreview() {
       return;
     }
 
-    setPreviewUrl(URL.createObjectURL(file));
+    setPreviewUrl("");
     setImageSize(null);
     setResult(null);
     setError("");
     setStatus("loading");
 
-    const formData = new FormData();
-    formData.append("file", file);
     try {
+      const inferenceFile = await prepareImageForInference(file);
+      if (inferenceFile.size > 10 * 1024 * 1024) {
+        throw new Error("The prepared image is still larger than the 10 MB service limit.");
+      }
+      setPreviewUrl(URL.createObjectURL(inferenceFile));
+      const formData = new FormData();
+      formData.append("file", inferenceFile);
       const response = await fetch("https://variavision-1.onrender.com/detect", {
         method: "POST",
         body: formData
@@ -86,14 +116,14 @@ function DetectionPreview() {
     </div>
     <div className="vision-demo-controls">
       <label className="vision-upload-button">{previewUrl ? "Run another image" : "Choose an image"} <ArrowUpRight size={14}/><input type="file" accept="image/*" onChange={onFileChange}/></label>
-      <span>JPG · PNG · WEBP · max 10 MB</span>
+      <span>JPG · PNG · WEBP · max 10 MB · optimized before upload</span>
     </div>
     {status === "done" && <div className="vision-result">
       <div className="vision-result-head"><strong>MODEL RESPONSE</strong><span>{result.detections_count} detections returned</span></div>
-      {detections.length ? <div className="vision-detection-list">{detections.map((detection,index)=><div key={index}><span className={String(detection.class || "").toLowerCase().includes("weed") ? "detection-weed" : "detection-crop"}>{String(detection.class || "object").toUpperCase()}</span><strong>{Math.round((Number(detection.confidence)||0)*100)}%</strong></div>)}</div> : <p className="vision-result-note">No detections returned at the current confidence threshold (0.25). This does not establish that weeds or crops are absent.</p>}
+      {detections.length ? <div className="vision-detection-list">{detections.map((detection,index)=><div key={index}><span className={String(detection.class || "").toLowerCase().includes("weed") ? "detection-weed" : "detection-other"}>{String(detection.class || "object").toUpperCase()}</span><strong>{Math.round((Number(detection.confidence)||0)*100)}%</strong></div>)}</div> : <p className="vision-result-note">No detections returned at the current confidence threshold (0.25). This does not establish that weeds or crops are absent.</p>}
     </div>}
     {status === "error" && <p className="vision-error" role="alert">{error}</p>}
-    <div className="preview-legend"><span><i className="legend-crop" /> Crop class</span><span><i className="legend-weed" /> Weed class</span><span className="preview-disclaimer">Prototype · Human review required</span></div>
+    <div className="preview-legend"><span><i className="legend-weed" /> Weed class</span><span className="preview-disclaimer">Prototype · Human review required</span></div>
     <div className="preview-bottom"><span>RGB IMAGE INPUT</span><span>OUTPUT IS NOT FIELD-VALIDATED</span></div>
     <p className="vision-privacy-note">Images are sent to the inference API for processing. Do not upload confidential or sensitive imagery.</p>
   </div>;
