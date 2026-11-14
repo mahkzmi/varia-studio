@@ -1,10 +1,24 @@
-# Varia Studio — Version 2.0
+# Varia Studio
 
-A highly customized, responsive single-page studio website built with React, Vite, Tailwind CSS, and lucide-react.
+Varia Studio is an independent, founder-led applied AI and geospatial engineering studio focused on agriculture, soil and environmental data.
 
-## Run locally
+## Positioning
+The studio works with AgTech product teams, drone and geospatial firms, and soil/environment consultancies on scoped technical engagements involving:
+- Computer vision and machine-learning evaluation/integration
+- Geospatial data engineering and remote-sensing workflows
+- Soil and environmental data pipelines
+- Backend APIs, dashboards and decision-support software
 
-Requires Node.js 18+.
+Varia Vision and Varia Carbon are internal technical assets at different validation stages. They are not represented as independently field-validated production products.
+
+## Stack
+- React 18
+- Vite 6
+- Tailwind CSS 3
+- lucide-react
+
+## Local development
+Requires Node.js 18 or newer.
 
 ```bash
 npm install
@@ -12,7 +26,6 @@ npm run dev
 ```
 
 ## Production build
-
 ```bash
 npm run build
 npm run preview
@@ -20,41 +33,23 @@ npm run preview
 
 The deployable output is generated in `dist/`.
 
-## Customize the entire website
+## Project structure
+- `src/App.jsx` — website sections and interactions
+- `src/styles.css` — brand system, layout and responsive styles
+- `src/main.jsx` — React entry point
+- `public/` — favicon, founder image, robots.txt and sitemap.xml
 
-**Most content and brand settings live in one file:**
-
-`src/data/siteConfig.js`
-
-You can edit:
-- Brand name, monogram, positioning and footer
-- Theme colors
-- Navigation labels and anchors
-- Hero headline, description and CTA labels
-- Intro copy
-- All product names, descriptions, statuses, metrics, methodologies, caveats, stack tags and links
-- Method steps and capability tags
-- Founder bio and statement
-- Contact email and social links
-
-Theme values are applied as CSS variables at runtime. Tailwind utility colors also map to those variables.
-
-## Product details
-
-Each project card opens an interactive detail panel. The product data is driven by `siteConfig.js`; add, remove, or edit product objects there.
-
-## Important launch checklist
-
-1. Replace the LinkedIn homepage URL with the founder's actual profile URL.
-2. Confirm the Varia Vision public URL.
-3. Add a public Trait-Bridge research or product URL when ready.
-4. Verify all model metrics, dataset descriptions, validation protocols, and claims before publication.
-5. Consider adding a custom domain and a real Open Graph preview image before launch.
+## Evidence and claim governance
+- Internal model benchmarks must never be presented as independent or customer-field validation.
+- Customer names, logos, quotes, datasets and results require permission.
+- Varia Carbon is not currently offered for MRV, carbon-credit issuance or high-stakes soil decisions.
+- Varia Vision is an experimental prototype; production readiness and field performance are not claimed.
+- Do not publish customer outcomes until they are documented and approved.
 
 ## Deploy
-
-Vercel / Netlify:
+Vercel:
+- Framework: Vite
 - Build command: `npm run build`
 - Output directory: `dist`
 
-This is a static frontend. No backend or database is required.
+Product APIs and demos are deployed separately from this public website.
