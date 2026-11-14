@@ -1,136 +1,200 @@
-import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronDown, CircleDot, Cpu, Crosshair, Database, Layers3, Linkedin, Mail, Menu, ScanLine, ShieldCheck, Sprout, X } from "lucide-react";
+import {
+  ArrowDownRight, ArrowRight, ArrowUpRight, Check, Code2, Database,
+  Globe2, Layers3, Mail, MapPinned, Menu, ScanEye, ShieldCheck,
+  Sprout, Workflow, X
+} from "lucide-react";
 import { useState } from "react";
 
 const email = "mah.kzmi21@gmail.com";
 const linkedin = "https://www.linkedin.com/in/mahdieh-kazemi-505bab319/";
-const mailto = (subject, body = "") => `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+const mailto = (subject, body = "") =>
+  `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
 function Brand() {
-  return <a className="brand" href="#top" aria-label="Varia Studio home"><span className="brand-symbol">V<span>.</span></span><span>VARIA<span className="brand-light"> STUDIO</span></span></a>;
+  return (
+    <a className="brand" href="#top" aria-label="Varia Studio home">
+      <span className="brand-mark"><span>V</span><i /></span>
+      <span className="brand-name">VARIA<span>STUDIO</span></span>
+    </a>
+  );
 }
 
-async function prepareImageForInference(file) {
-  const bitmap = await createImageBitmap(file);
-  try {
-    const maxSide = 1600;
-    const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
-    const width = Math.max(1, Math.round(bitmap.width * scale));
-    const height = Math.max(1, Math.round(bitmap.height * scale));
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-    const context = canvas.getContext("2d", { alpha: false });
-    if (!context) throw new Error("Your browser could not prepare this image.");
-    context.fillStyle = "#ffffff";
-    context.fillRect(0, 0, width, height);
-    context.drawImage(bitmap, 0, 0, width, height);
-    const blob = await new Promise((resolve, reject) => {
-      canvas.toBlob((value) => value ? resolve(value) : reject(new Error("Image compression failed.")), "image/jpeg", 0.82);
-    });
-    const baseName = file.name.replace(/\\.[^.]+$/, "") || "field-image";
-    return new File([blob], baseName + ".jpg", { type: "image/jpeg", lastModified: Date.now() });
-  } finally {
-    bitmap.close();
-  }
-}
-
-function DetectionPreview() {
-  return <div className="vision-demo" aria-label="Varia Vision service preview">
-    <div className="preview-top"><span><i className="live-dot" /> VARIA VISION / INFERENCE API</span><span>PROTOTYPE</span></div>
-    <div className="vision-demo-stage vision-service-stage">
-      <div className="vision-service-art">
-        <div className="service-grid-lines" />
-        <div className="service-scan-ring"><ScanLine size={54}/></div>
-        <span className="service-coordinate service-coordinate-a">RGB / AERIAL</span>
-        <span className="service-coordinate service-coordinate-b">WEED CLASS</span>
-        <span className="service-coordinate service-coordinate-c">MODEL · ONNX</span>
-      </div>
-      <div className="vision-service-copy">
-        <span className="service-kicker">COMPUTER VISION FOR AGRICULTURE</span>
-        <strong>Varia Vision</strong>
-        <p>Explore the inference service and its API documentation.</p>
-        <a className="button button-primary service-open-button" href="https://variavision-1.onrender.com/docs" target="_blank" rel="noreferrer">Open Varia Vision <ArrowUpRight size={15}/></a>
-      </div>
-    </div>
-    <div className="preview-legend"><span><i className="legend-weed" /> Weed detection prototype</span><span className="preview-disclaimer">Experimental · Human review required</span></div>
-    <div className="preview-bottom"><span>API SERVICE</span><span>FIELD VALIDATION REQUIRED</span></div>
-  </div>;
-}
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const links = [["The approach", "#approach"], ["Evaluation", "#evaluation"], ["Studio", "#studio"]];
-  return <header className="site-header"><nav className="nav-shell" aria-label="Main navigation">
-    <Brand />
-    <div className="nav-links">{links.map(([label, href]) => <a href={href} key={href}>{label}</a>)}</div>
-    <a className="nav-cta" href="#contact">Discuss an evaluation <ArrowUpRight size={15} /></a>
-    <button className="menu-toggle" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>{open ? <X /> : <Menu />}</button>
-  </nav>{open && <div className="mobile-nav">{links.map(([label, href]) => <a href={href} key={href} onClick={() => setOpen(false)}>{label}</a>)}<a href="#contact" onClick={() => setOpen(false)}>Discuss an evaluation <ArrowUpRight size={15}/></a></div>}</header>;
+  const links = [["Services", "#services"], ["Selected work", "#work"], ["Approach", "#approach"], ["Studio", "#studio"]];
+  return (
+    <header className="site-header">
+      <nav className="nav-shell" aria-label="Main navigation">
+        <Brand />
+        <div className="nav-links">{links.map(([label, href]) => <a href={href} key={href}>{label}</a>)}</div>
+        <a className="nav-cta" href="#contact">Discuss a project <ArrowUpRight size={15} /></a>
+        <button className="menu-toggle" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>
+          {open ? <X /> : <Menu />}
+        </button>
+      </nav>
+      {open && <div className="mobile-nav">
+        {links.map(([label, href]) => <a href={href} key={href} onClick={() => setOpen(false)}>{label}</a>)}
+        <a href="#contact" onClick={() => setOpen(false)}>Discuss a project <ArrowUpRight size={15}/></a>
+      </div>}
+    </header>
+  );
 }
 
 function Hero() {
-  return <section className="hero section-wrap" id="top">
-    <div className="hero-copy">
-      <div className="eyebrow"><span className="eyebrow-mark" /> APPLIED AI FOR AGRICULTURE <span className="eyebrow-line" /></div>
-      <p className="hero-label">AERIAL IMAGERY → FIELD-LEVEL INSIGHT</p>
-      <h1>Make every field image <em>more useful.</em></h1>
-      <p className="hero-lead">Explore the Varia Vision inference service and discuss a focused evaluation for your aerial imagery.</p>
-      <div className="hero-actions"><a className="button button-primary" href="#evaluation">Explore a paid evaluation <ArrowUpRight size={17}/></a><a className="text-action" href="#approach">See how it works <ArrowDownRight size={16}/></a></div>
-      <div className="hero-proofline"><span><Check size={14}/> Customer-image evaluation</span><span><Check size={14}/> Transparent limitations</span><span><Check size={14}/> Scoped before work begins</span></div>
-    </div>
-    <div className="hero-visual"><div className="visual-orbit orbit-a"/><div className="visual-orbit orbit-b"/><DetectionPreview/><div className="visual-note"><span className="note-index">01 / 03</span><span>FROM RAW CAPTURE<br/>TO REVIEWABLE OUTPUT</span></div></div>
-    <div className="hero-bottom"><span>INDEPENDENT AGTECH SOFTWARE STUDIO</span><span>FROM IRAN · FOR THE WORLD</span></div>
-  </section>;
+  return (
+    <section className="hero section-wrap" id="top">
+      <div className="hero-copy">
+        <div className="eyebrow"><span className="eyebrow-dot" /> INDEPENDENT ENGINEERING STUDIO <span className="eyebrow-rule" /></div>
+        <p className="hero-overline">APPLIED AI · GEOSPATIAL · AGRICULTURE</p>
+        <h1>Complex field data.<br/><em>Useful software.</em></h1>
+        <p className="hero-lead">Varia Studio helps AgTech and geospatial teams turn agricultural, soil and environmental data into practical software — from computer-vision workflows to spatial data systems and APIs.</p>
+        <div className="hero-actions">
+          <a className="button button-primary" href="#contact">Discuss a project <ArrowUpRight size={16}/></a>
+          <a className="text-link" href="#work">Explore technical work <ArrowDownRight size={16}/></a>
+        </div>
+        <div className="hero-meta"><span>Founder-led</span><i /> <span>Project-based</span><i /> <span>Working internationally</span></div>
+      </div>
+      <div className="hero-visual" aria-label="Varia Studio engineering disciplines">
+        <div className="visual-topline"><span>VARIA / ENGINEERING SYSTEMS</span><span>01 — 04</span></div>
+        <div className="visual-core">
+          <div className="orbit orbit-one"/><div className="orbit orbit-two"/><div className="orbit orbit-three"/>
+          <div className="core-node"><span>V.</span><small>DATA → DECISIONS</small></div>
+          <div className="orbit-label label-a"><ScanEye size={15}/> COMPUTER VISION</div>
+          <div className="orbit-label label-b"><MapPinned size={15}/> GEOSPATIAL DATA</div>
+          <div className="orbit-label label-c"><Database size={15}/> DATA ENGINEERING</div>
+          <div className="orbit-label label-d"><Code2 size={15}/> SOFTWARE SYSTEMS</div>
+        </div>
+        <div className="visual-foot"><span>SOIL SCIENCE IN THE LOOP</span><span>BUILT FOR REAL WORKFLOWS</span></div>
+      </div>
+      <div className="hero-bottom"><span>FROM RESEARCH TO WORKING SOFTWARE</span><span>VARIA STUDIO <b>© 2026</b></span></div>
+    </section>
+  );
 }
 
-function TrustStrip() {
-  return <section className="trust-strip"><div className="section-wrap trust-inner"><div><span className="trust-number">01</span><span>Soil science<br/>domain knowledge</span></div><div><span className="trust-number">02</span><span>Applied machine<br/>learning</span></div><div><span className="trust-number">03</span><span>Geospatial data<br/>workflows</span></div><div><span className="trust-number">04</span><span>Software built<br/>for real use</span></div></div></section>;
-}
-
-function Problem() {
-  return <section className="section-wrap section-block problem-block" id="approach">
-    <div className="section-kicker">01 / THE OPPORTUNITY</div><div className="problem-grid"><div><h2>Collecting imagery is one thing.<br/><em>Knowing what it tells you is another.</em></h2></div><div className="problem-copy"><p>Drone service providers and agricultural teams can capture large volumes of field imagery. Turning those images into consistent weed observations is a separate operational challenge.</p><p>Varia Vision is an experimental computer-vision workflow designed to explore that step — with your imagery, your conditions, and the limitations made visible.</p></div></div>
-    <div className="feature-grid"><article><Crosshair/><h3>Weed detection</h3><p>Explore object-level detections in RGB aerial imagery.</p></article><article><ScanLine/><h3>Image-level review</h3><p>Inspect outputs and examples rather than relying on a headline score.</p></article><article><ShieldCheck/><h3>Evidence before scale</h3><p>Identify failure cases and fit before discussing integration or deployment.</p></article></div>
-  </section>;
-}
-
-function Evaluation() {
-  const items = ["A review of the supplied imagery and its suitability for evaluation", "Detection outputs on an agreed sample of images", "A concise summary of observed strengths, errors and failure cases", "A technical discussion of next steps, integration needs and open risks"];
-  return <section className="evaluation-section" id="evaluation"><div className="section-wrap evaluation-grid">
-    <div><div className="section-kicker">02 / A SMALL, DEFINED FIRST STEP</div><h2>Start with an <em>evaluation.</em><br/>Not a leap of faith.</h2><p className="evaluation-lead">A paid, bounded technical evaluation helps both sides decide whether the workflow is useful on the imagery that matters to you.</p><a className="button button-primary" href={mailto("Varia Vision — evaluation scope", "Hello Varia Studio,\n\nI'd like to discuss an evaluation using our aerial imagery.\n\nWeed type / use case:\nLocation:\nImage format / sample size:\nWhat we want to learn:\n")}>Discuss your evaluation <ArrowUpRight size={17}/></a></div>
-    <div className="deliverable-card"><div className="deliverable-head"><span>WHAT THE EVALUATION CAN INCLUDE</span><span>01—04</span></div>{items.map((item,i)=><div className="deliverable-row" key={item}><span>0{i+1}</span><p>{item}</p><Check size={16}/></div>)}<div className="deliverable-foot"><span>Scope, timeline and fee</span><strong>Agreed before work starts</strong></div></div>
+function CapabilityStrip() {
+  const items = ["Soil & environmental context", "Applied machine learning", "Geospatial workflows", "Production-minded software"];
+  return <section className="capability-strip"><div className="section-wrap capability-inner">
+    {items.map((item, i) => <div key={item}><span>0{i+1}</span><p>{item}</p></div>)}
   </div></section>;
 }
 
-function Process() {
-  const steps = [{n:"01",title:"Share a sample",text:"Tell us about the weed type, location, capture method and the decision you want to support."},{n:"02",title:"Agree the scope",text:"We review suitability, define the sample size and confirm deliverables, timing and fee."},{n:"03",title:"Evaluate the output",text:"We run the agreed assessment and document what works, what fails and what remains unknown."},{n:"04",title:"Decide with evidence",text:"Review the findings together and decide whether a next-stage pilot is justified."}];
-  return <section className="section-wrap section-block process-block"><div className="section-kicker">03 / HOW IT WORKS</div><div className="section-heading"><h2>A clear process.<br/><em>No black-box promises.</em></h2><p>We make the first engagement small enough to assess, and specific enough to be useful.</p></div><div className="process-grid">{steps.map(s=><article key={s.n}><span>{s.n}</span><div className="process-rule"/><h3>{s.title}</h3><p>{s.text}</p></article>)}</div></section>;
+const services = [
+  { icon: <ScanEye/>, number: "01", title: "Computer vision & ML", intro: "Turn image and sensor data into reviewable, testable workflows.", points: ["Model evaluation and error analysis", "Image pipelines and annotation workflows", "Inference APIs and model integration"] },
+  { icon: <MapPinned/>, number: "02", title: "Geospatial engineering", intro: "Build reliable systems around spatial and environmental data.", points: ["Raster and vector processing", "Remote-sensing data workflows", "Spatial databases, APIs and maps"] },
+  { icon: <Database/>, number: "03", title: "Soil & environmental data", intro: "Connect scientific context, field observations and data products.", points: ["Data ingestion and quality control", "Environmental predictor integration", "Reproducible analysis pipelines"] },
+  { icon: <Workflow/>, number: "04", title: "Software delivery", intro: "Move a technical concept into a usable, maintainable application.", points: ["Backend and API development", "Dashboards and decision-support tools", "Technical audits and implementation sprints"] }
+];
+
+function Services() {
+  return <section className="section-wrap section-block services-block" id="services">
+    <div className="section-intro">
+      <div><div className="section-kicker">01 / WHAT WE DO</div><h2>Engineering that starts<br/><em>with the real problem.</em></h2></div>
+      <p>One focused technical partner for teams that need to make data useful — without hiring an entire specialist team or committing to a black-box solution.</p>
+    </div>
+    <div className="service-grid">{services.map(s => <article className="service-card" key={s.number}>
+      <div className="service-card-top"><span>{s.number}</span><div>{s.icon}</div></div>
+      <h3>{s.title}</h3><p className="service-intro">{s.intro}</p>
+      <ul>{s.points.map(p => <li key={p}><Check size={14}/>{p}</li>)}</ul>
+    </article>)}</div>
+    <div className="services-note"><ShieldCheck size={17}/><p>Every engagement is scoped around your data, workflow and acceptance criteria. We do not promise model performance before testing the conditions it will face.</p></div>
+  </section>;
 }
 
-function Evidence() {
-  return <section className="evidence-section"><div className="section-wrap evidence-grid"><div><div className="section-kicker">04 / CURRENT TECHNICAL BASELINE</div><h2>Promising benchmark.<br/><em>Honest about the gap.</em></h2><p>Varia Vision is a benchmarked prototype. The figures below describe internal validation only; they are not independent, customer-specific or field-validation results.</p></div><div className="metrics-grid"><div><strong>0.788</strong><span>mAP50 · internal validation</span></div><div><strong>5.2 ms</strong><span>Inference time · T4 benchmark</span></div><div><strong>YOLOv8n</strong><span>Model architecture</span></div><div><strong>RGB</strong><span>Aerial image input focus</span></div></div></div><div className="section-wrap evidence-foot"><ShieldCheck size={17}/><p>Actual performance depends on image resolution, altitude, crop type, lighting, growth stage, annotation quality and field conditions. The evaluation exists to measure fit on your data — not to assume it.</p></div></section>;
+function Work() {
+  return <section className="work-section" id="work"><div className="section-wrap">
+    <div className="section-intro work-intro">
+      <div><div className="section-kicker">02 / SELECTED TECHNICAL WORK</div><h2>Built, tested<br/><em>and still being questioned.</em></h2></div>
+      <p>These are studio-built technical assets, not customer case studies. We distinguish internal benchmarks from independent or field validation — and publish only what the evidence supports.</p>
+    </div>
+    <div className="work-grid">
+      <article className="work-card vision-card">
+        <div className="work-visual vision-visual"><div className="scan-grid"/><div className="scan-frame"><span/><span/><span/><span/></div><div className="scan-caption">RGB / AERIAL IMAGERY</div><div className="scan-tag">WEED CLASS · ONNX</div></div>
+        <div className="work-content">
+          <div className="work-meta"><span>COMPUTER VISION</span><span className="status status-prototype">INTERNAL PROTOTYPE</span></div>
+          <h3>Varia Vision</h3>
+          <p>An experimental weed-detection workflow for RGB aerial imagery, with a FastAPI inference service and ONNX deployment.</p>
+          <div className="work-facts"><span>YOLOv8n</span><span>Single deployed weed class</span><span>Field validation pending</span></div>
+          <a className="work-link" href="https://variavision-1.onrender.com/docs" target="_blank" rel="noreferrer">View API documentation <ArrowUpRight size={15}/></a>
+        </div>
+      </article>
+      <article className="work-card carbon-card">
+        <div className="work-visual carbon-visual"><div className="carbon-contours"><span/><span/><span/><span/><span/><span/></div><div className="carbon-coordinate">SOC / ENVIRONMENTAL PREDICTORS</div><div className="carbon-cross">+</div></div>
+        <div className="work-content">
+          <div className="work-meta"><span>SOIL INTELLIGENCE</span><span className="status status-research">RESEARCH PROTOTYPE</span></div>
+          <h3>Varia Carbon</h3>
+          <p>Research into soil organic carbon concentration estimation using environmental and geospatial predictors.</p>
+          <div className="work-facts"><span>Data provenance review</span><span>Validation rebuild required</span></div>
+          <span className="work-link work-link-muted">Not offered for MRV or carbon-credit decisions</span>
+        </div>
+      </article>
+    </div>
+    <div className="work-integrity"><span className="integrity-mark"><ShieldCheck size={18}/></span><p><strong>Evidence, not theatre.</strong> Varia has not yet published paid customer case studies. We will not invent client results, testimonials or field outcomes to make the portfolio look bigger than it is.</p></div>
+  </div></section>;
+}
+
+function WhoWeHelp() {
+  const audiences = [
+    { icon: <Globe2/>, title: "AgTech product teams", text: "Adding an analytics, ML or data capability to an existing product." },
+    { icon: <MapPinned/>, title: "Drone & geospatial firms", text: "Turning captured imagery and spatial data into a useful customer deliverable." },
+    { icon: <Sprout/>, title: "Soil & environment consultancies", text: "Connecting field data, scientific context and repeatable digital workflows." }
+  ];
+  return <section className="section-wrap section-block audience-block">
+    <div className="section-kicker">03 / WHO WE WORK WITH</div>
+    <div className="audience-layout"><h2>For teams with data<br/><em>and a reason to use it.</em></h2>
+      <div className="audience-list">{audiences.map(a=><article key={a.title}><div>{a.icon}</div><section><h3>{a.title}</h3><p>{a.text}</p></section><ArrowUpRight size={16}/></article>)}</div>
+    </div>
+  </section>;
+}
+
+function Approach() {
+  const steps = [
+    ["01", "Understand the workflow", "We start with the operational problem, current process, users and decision that needs to improve."],
+    ["02", "Inspect the data", "We assess data quality, access rights, technical constraints and what can realistically be measured."],
+    ["03", "Agree a bounded scope", "Deliverables, success criteria, timeline, fee and exclusions are written down before implementation."],
+    ["04", "Build, test and hand over", "You receive working outputs, limitations, documentation and a clear recommendation for what comes next."]
+  ];
+  return <section className="approach-section" id="approach"><div className="section-wrap">
+    <div className="section-intro"><div><div className="section-kicker">04 / HOW WE WORK</div><h2>Small enough to start.<br/><em>Clear enough to trust.</em></h2></div><p>No open-ended experiments. No mystery scope. A first engagement should create useful evidence for both sides.</p></div>
+    <div className="steps-grid">{steps.map(([n,t,d])=><article key={n}><span>{n}</span><div className="step-line"/><h3>{t}</h3><p>{d}</p></article>)}</div>
+  </div></section>;
 }
 
 function Studio() {
-  return <section className="section-wrap section-block studio-block" id="studio"><div className="studio-mark"><Sprout size={36}/><span>V / S</span></div><div className="studio-copy"><div className="section-kicker">05 / THE STUDIO</div><h2>Science in the loop.<br/><em>Software in the field.</em></h2><p>Varia Studio is an independent applied AI and software studio founded by Mahdieh Kazemi. Its work sits at the intersection of soil science, agricultural data, machine learning and software engineering.</p><p>We build focused tools, test assumptions against data, and treat validation as part of the product — not a footnote.</p><a className="text-action" href={linkedin} target="_blank" rel="noreferrer">Meet the founder on LinkedIn <ArrowUpRight size={15}/></a></div></section>;
-}
-
-function OtherWork() {
-  return <section className="other-work"><div className="section-wrap other-inner"><div><div className="section-kicker">ALSO IN THE STUDIO</div><h2>More questions.<br/><em>Related research.</em></h2></div><div className="other-card"><div className="other-icon"><Layers3/></div><div><span>SOIL INTELLIGENCE</span><h3>Varia Carbon</h3><p>Experimental soil organic carbon estimation using environmental and geospatial predictors.</p><a href="https://varia-carbon.streamlit.app/" target="_blank" rel="noreferrer">Explore the research demo <ArrowUpRight size={14}/></a></div></div><div className="other-card"><div className="other-icon"><Database/></div><div><span>RESEARCH DIRECTION</span><h3>Trait-Bridge</h3><p>An early-stage direction exploring interpretable machine learning for genomic and trait-oriented analysis.</p><span className="muted-note">In development · no performance claims</span></div></div></div></section>;
+  return <section className="section-wrap section-block studio-block" id="studio">
+    <div className="studio-identity"><div className="studio-monogram">V<span>.</span></div><div className="studio-identity-foot"><span>INDEPENDENT</span><span>FOUNDER-LED</span></div></div>
+    <div className="studio-copy"><div className="section-kicker">05 / THE STUDIO</div><h2>Scientific thinking.<br/><em>Engineering discipline.</em></h2>
+      <p>Varia Studio is an independent, founder-led applied AI and software studio founded by Mahdieh Kazemi. Its work connects soil science, agricultural data, geospatial workflows, machine learning and backend engineering.</p>
+      <p>The studio is intentionally small: senior attention from the first conversation, direct communication with the person building the work, and a clear record of what is known, what is uncertain and what has been delivered.</p>
+      <a className="text-link" href={linkedin} target="_blank" rel="noreferrer">Connect with the founder <ArrowUpRight size={15}/></a>
+    </div>
+  </section>;
 }
 
 function FAQ() {
-  const faqs = [{q:"Is Varia Vision production-ready?",a:"No. It is a benchmarked prototype. We offer a scoped evaluation to understand performance on your imagery before any production or deployment discussion."},{q:"What imagery can I share?",a:"Start by describing your RGB aerial imagery, capture platform, resolution, altitude, crop and geography. We will confirm suitability and a secure transfer method before you send files."},{q:"Does the benchmark guarantee field accuracy?",a:"No. The reported mAP50 and inference timing are internal benchmark figures. They do not establish performance on your fields, sensors or operating conditions."},{q:"How much does an evaluation cost?",a:"The fee depends on image volume, image characteristics and the agreed deliverables. Scope, timeline and price are confirmed before work begins."}];
-  return <section className="section-wrap section-block faq-block"><div className="faq-heading"><div className="section-kicker">QUESTIONS, ANSWERED</div><h2>Before we <em>talk.</em></h2></div><div className="faq-list">{faqs.map(f=><details key={f.q}><summary>{f.q}<ChevronDown size={17}/></summary><p>{f.a}</p></details>)}</div></section>;
+  const items = [
+    ["Are you an established agency with a large team?", "No. Varia is a founder-led independent studio. You work directly with the person responsible for the technical delivery. If a project needs additional capacity, that is discussed transparently before scope is agreed."],
+    ["Do you have customer case studies?", "Varia has not yet published paid customer case studies. The work shown here is clearly labeled as internal prototype or research work. Customer outcomes will only be published with permission and supporting evidence."],
+    ["How do projects get priced?", "We use a scoped project fee based on the problem, data, complexity, deliverables and timeline. If the problem is not yet clear, the first step can be a paid diagnostic rather than an open-ended estimate."],
+    ["Can you work with confidential data?", "We first agree the data required, permitted use, access controls, retention and transfer method. Please do not email sensitive datasets or personal information before those arrangements are agreed."],
+    ["Do you sell Varia Vision or Varia Carbon as production products?", "Not currently. Vision is an experimental computer-vision prototype; Carbon is a research prototype undergoing evidence review. We do not position either as a validated production or MRV product."]
+  ];
+  return <section className="section-wrap section-block faq-block"><div><div className="section-kicker">06 / QUESTIONS</div><h2>Clear answers<br/><em>before we begin.</em></h2></div><div className="faq-list">{items.map(([q,a])=><details key={q}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</div></section>;
 }
 
 function Contact() {
-  return <section className="contact-section" id="contact"><div className="section-wrap contact-panel"><div><div className="section-kicker">06 / START A CONVERSATION</div><h2>Have imagery?<br/><em>Let's evaluate it.</em></h2><p>Tell us what you capture, what you grow and what you need to understand. We’ll start by checking whether a focused evaluation makes sense.</p><a className="button button-primary" href={mailto("Varia Vision — let's discuss your imagery", "Hello Varia Studio,\n\nI'd like to discuss Varia Vision for our aerial imagery.\n\nName / organisation:\nWeed type / use case:\nLocation:\nCapture platform and image type:\nWhat we'd like to evaluate:\n")}>Email Varia Studio <Mail size={16}/></a></div><div className="contact-aside"><span>DIRECT CONTACT</span><a href={`mailto:${email}`}>{email}<ArrowUpRight size={15}/></a><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={15}/></a><div className="contact-location"><span className="live-dot"/> Independent studio · Working internationally</div></div></div></section>;
+  const body = "Hello Varia Studio,\n\nI'd like to discuss a project.\n\nOrganisation / role:\nCurrent workflow or problem:\nData available:\nWhat a successful outcome would change:\nTimeline:\n";
+  return <section className="contact-section" id="contact"><div className="section-wrap contact-panel">
+    <div className="contact-copy"><div className="section-kicker">07 / START A PROJECT</div><h2>Bring us the<br/><em>hard part.</em></h2><p>Tell us what is not working, what data you have and what needs to happen next. We will respond with a practical first step — or tell you honestly if it is not a fit.</p>
+      <a className="button button-primary" href={mailto("Project enquiry — Varia Studio", body)}>Discuss a project <Mail size={16}/></a>
+    </div>
+    <div className="contact-aside"><span>DIRECT CONTACT</span><a href={`mailto:${email}`}>{email}<ArrowUpRight size={15}/></a><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={15}/></a><div className="contact-rule"/><p>Independent studio<br/>Remote-first · International projects</p><small>Please do not send confidential files before a secure transfer method is agreed.</small></div>
+  </div></section>;
 }
 
 function Footer() {
-  return <footer className="footer"><div className="section-wrap footer-inner"><Brand/><span>Applied AI for agriculture, built with scientific care.</span><span>© {new Date().getFullYear()} Varia Studio</span><a href="#top">Back to top ↑</a></div></footer>;
+  return <footer className="footer"><div className="section-wrap footer-inner"><Brand/><span>Applied AI & geospatial engineering for agriculture, soil and the environment.</span><span>© {new Date().getFullYear()} Varia Studio</span><a href="#top">Back to top ↑</a></div></footer>;
 }
 
 export default function App() {
-  return <><Navbar/><main><Hero/><TrustStrip/><Problem/><Evaluation/><Process/><Evidence/><Studio/><OtherWork/><FAQ/><Contact/></main><Footer/></>;
+  return <><Navbar/><main><Hero/><CapabilityStrip/><Services/><Work/><WhoWeHelp/><Approach/><Studio/><FAQ/><Contact/></main><Footer/></>;
 }
