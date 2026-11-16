@@ -31,3 +31,5 @@
 
 .wfi-consent{position:fixed;z-index:80;left:18px;right:18px;bottom:18px;max-width:920px;margin:auto;padding:18px 20px;background:#17241a;border:1px solid #d4a24c88;box-shadow:0 18px 60px #0009;display:flex;align-items:center;gap:16px}.wfi-consent>div{flex:1}.wfi-consent b{font-size:11px}.wfi-consent p{font-size:8px;color:var(--muted);line-height:1.7;margin:5px 0 0}.wfi-consent button{border:1px solid var(--gold);background:var(--gold);color:#14170f;padding:10px 12px;font-size:8px;font-weight:800;white-space:nowrap}.wfi-consent .wfi-consent-secondary{background:transparent;color:var(--cream);border-color:var(--line)}
 @media(max-width:700px){.wfi-consent{left:10px;right:10px;bottom:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px}.wfi-consent>div{grid-column:1/-1}.wfi-consent button{white-space:normal;min-height:38px}}
+
+.wfi-privacy-details{margin-top:10px;border-top:1px solid var(--line);padding-top:9px}.wfi-privacy-details summary{cursor:pointer;color:var(--gold);font-size:8px}.wfi-privacy-details p{max-width:900px}.wfi-privacy-details p b{color:var(--cream)}
