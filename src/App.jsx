@@ -4,6 +4,7 @@ import {
   Sprout, Workflow, X
 } from "lucide-react";
 import { useState } from "react";
+import WorkflowFriction from "./WorkflowFriction.jsx";
 
 const email = "mah.kzmi21@gmail.com";
 const linkedin = "https://www.linkedin.com/in/mahdieh-kazemi-505bab319/";
