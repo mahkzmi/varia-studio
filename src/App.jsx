@@ -197,6 +197,6 @@ function Footer() {
 }
 
 export default function App() {
-  if (window.location.pathname.replace(/\\/$/, "") === "/workflow-friction-index") return <WorkflowFriction />;
+  if (window.location.pathname === "/workflow-friction-index" || window.location.pathname === "/workflow-friction-index/") return <WorkflowFriction />;
   return <><Navbar/><main><Hero/><CapabilityStrip/><Services/><Work/><WhoWeHelp/><Approach/><Studio/><FAQ/><Contact/></main><Footer/></>;
 }
