@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/workflow-friction-index", "destination": "/workflow-friction-index.html" },
+    { "source": "/workflow-friction-index/", "destination": "/workflow-friction-index.html" }
+  ]
+}

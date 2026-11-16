@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b100d"/><stop offset="1" stop-color="#1d3826"/></linearGradient><radialGradient id="glow"><stop offset="0" stop-color="#2f4f3a" stop-opacity=".9"/><stop offset="1" stop-color="#0b100d" stop-opacity="0"/></radialGradient></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><circle cx="930" cy="320" r="330" fill="url(#glow)"/><rect x="38" y="38" width="1124" height="554" fill="none" stroke="#d4a24c" stroke-opacity=".55" stroke-width="2"/>
+<text x="82" y="105" fill="#d4a24c" font-family="Arial,sans-serif" font-size="22" letter-spacing="4">VARIA STUDIO / FIELD STUDY 2026</text>
+<text x="82" y="245" fill="#f5f0e8" font-family="Arial,sans-serif" font-size="84" font-weight="700" letter-spacing="-4">THE $10,000</text><text x="82" y="340" fill="#d4a24c" font-family="Arial,sans-serif" font-size="84" font-weight="700" letter-spacing="-4">QUESTION.</text>
+<text x="85" y="415" fill="#dbe4d7" font-family="Arial,sans-serif" font-size="29">What would you fix first?</text>
+<text x="85" y="485" fill="#a8c28d" font-family="Arial,sans-serif" font-size="20" letter-spacing="2">SOIL · GIS · REMOTE SENSING · AGRICULTURE</text>
+<text x="85" y="545" fill="#a4aea3" font-family="Arial,sans-serif" font-size="18">A thought experiment — not a prize or grant.</text>
+<g fill="none" stroke="#d4a24c" stroke-opacity=".5"><circle cx="930" cy="320" r="175"/><ellipse cx="930" cy="320" rx="270" ry="130" transform="rotate(35 930 320)"/><ellipse cx="930" cy="320" rx="310" ry="220" transform="rotate(-42 930 320)"/></g>
+<circle cx="930" cy="320" r="82" fill="#122017" stroke="#d4a24c" stroke-width="2"/><text x="930" y="312" text-anchor="middle" fill="#f5f0e8" font-family="Arial,sans-serif" font-size="18" letter-spacing="2">FRICTION</text><text x="930" y="346" text-anchor="middle" fill="#d4a24c" font-family="Arial,sans-serif" font-size="26">→ FIX</text>
+</svg>
