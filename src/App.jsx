@@ -45,15 +45,15 @@ function Hero() {
   return (
     <section className="hero section-wrap" id="top">
       <div className="hero-copy">
-        <div className="eyebrow"><span className="eyebrow-dot" /> INDEPENDENT ENGINEERING STUDIO <span className="eyebrow-rule" /></div>
-        <p className="hero-overline">APPLIED AI · GEOSPATIAL · AGRICULTURE</p>
-        <h1>Complex field data.<br/><em>Useful software.</em></h1>
-        <p className="hero-lead">Varia Studio helps AgTech and geospatial teams turn agricultural, soil and environmental data into practical software — from computer-vision workflows to spatial data systems and APIs.</p>
+        <div className="eyebrow"><span className="eyebrow-dot" /> APPLIED AGRICULTURAL TECHNOLOGY STUDIO <span className="eyebrow-rule" /></div>
+        <p className="hero-overline">SCIENCE · DATA · SOFTWARE · FIELD SYSTEMS</p>
+        <h1>Technology for<br/><em>agriculture’s next chapter.</em></h1>
+        <p className="hero-lead">Varia Studio is an independent applied agricultural technology studio. We connect scientific understanding, data, AI and software to help solve real agricultural challenges — from research and prototyping to practical digital systems and international collaboration.</p>
         <div className="hero-actions">
           <a className="button button-primary" href="#contact">Discuss a project <ArrowUpRight size={16}/></a>
           <a className="text-link" href="#work">Explore technical work <ArrowDownRight size={16}/></a>
         </div>
-        <div className="hero-meta"><span>Founder-led</span><i /> <span>Project-based</span><i /> <span>Working internationally</span></div>
+        <div className="hero-meta"><span>Research & development</span><i /> <span>Technology & implementation</span><i /> <span>International collaboration</span></div>
       </div>
       <div className="hero-visual" aria-label="Varia Studio engineering disciplines">
         <div className="visual-topline"><span>VARIA / ENGINEERING SYSTEMS</span><span>01 — 04</span></div>
@@ -73,17 +73,17 @@ function Hero() {
 }
 
 function CapabilityStrip() {
-  const items = ["Soil & environmental context", "Applied machine learning", "Geospatial workflows", "Production-minded software"];
+  const items = ["Agricultural science", "Applied research & development", "Data and intelligent tools", "Digital systems & integration"];
   return <section className="capability-strip"><div className="section-wrap capability-inner">
     {items.map((item, i) => <div key={item}><span>0{i+1}</span><p>{item}</p></div>)}
   </div></section>;
 }
 
 const services = [
-  { icon: <ScanEye/>, number: "01", title: "Computer vision & ML", intro: "Turn image and sensor data into reviewable, testable workflows.", points: ["Model evaluation and error analysis", "Image pipelines and annotation workflows", "Inference APIs and model integration"] },
-  { icon: <MapPinned/>, number: "02", title: "Geospatial engineering", intro: "Build reliable systems around spatial and environmental data.", points: ["Raster and vector processing", "Remote-sensing data workflows", "Spatial databases, APIs and maps"] },
-  { icon: <Database/>, number: "03", title: "Soil & environmental data", intro: "Connect scientific context, field observations and data products.", points: ["Data ingestion and quality control", "Environmental predictor integration", "Reproducible analysis pipelines"] },
-  { icon: <Workflow/>, number: "04", title: "Software delivery", intro: "Move a technical concept into a usable, maintainable application.", points: ["Backend and API development", "Dashboards and decision-support tools", "Technical audits and implementation sprints"] }
+  { icon: <Sprout/>, number: "01", title: "Agricultural intelligence", intro: "Bring agricultural science and data together to support better analysis and decisions.", points: ["Soil, crop and environmental data", "Analytical and predictive workflows", "Decision-support prototypes"] },
+  { icon: <MapPinned/>, number: "02", title: "Sensing & geospatial systems", intro: "Connect field observations, imagery, sensors and location-based information.", points: ["Remote-sensing and spatial workflows", "Computer vision and sensor data", "Geospatial data integration"] },
+  { icon: <Layers3/>, number: "03", title: "Research & technology development", intro: "Explore, prototype and evaluate approaches to complex agricultural problems.", points: ["Technical research and feasibility", "Prototyping and model evaluation", "Testing assumptions with real data"] },
+  { icon: <Workflow/>, number: "04", title: "Digital products & integration", intro: "Turn validated ideas into useful software components and connected workflows.", points: ["Backend services and APIs", "Data platforms and decision tools", "Technology integration with partners"] }
 ];
 
 function Services() {
@@ -173,7 +173,7 @@ function Studio() {
 
 function FAQ() {
   const items = [
-    ["Are you an established agency with a large team?", "No. Varia is a founder-led independent studio. You work directly with the person responsible for the technical delivery. If a project needs additional capacity, that is discussed transparently before scope is agreed."],
+    ["What kind of work does Varia take on?", "Varia works across applied agricultural technology: research and feasibility, data and AI workflows, geospatial and sensing applications, software development, and collaboration with specialist partners. The exact scope depends on the problem and the expertise required."],\n    ["Are you an established agency with a large team?", "No. Varia is an independent founder-led studio with a collaborative model. Specialist partners are brought in transparently when a project needs additional expertise or delivery capacity."],
     ["Do you have customer case studies?", "Varia has not yet published paid customer case studies. The work shown here is clearly labeled as internal prototype or research work. Customer outcomes will only be published with permission and supporting evidence."],
     ["How do projects get priced?", "We use a scoped project fee based on the problem, data, complexity, deliverables and timeline. If the problem is not yet clear, the first step can be a paid diagnostic rather than an open-ended estimate."],
     ["Can you work with confidential data?", "We first agree the data required, permitted use, access controls, retention and transfer method. Please do not email sensitive datasets or personal information before those arrangements are agreed."],
