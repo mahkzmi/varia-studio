@@ -22,7 +22,7 @@ function Brand() {
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const links = [["Capabilities", "#services"], ["Selected work", "#work"], ["Approach", "#approach"], ["Studio", "#studio"]];
+  const links = [["Capabilities", "#services"], ["Engagements", "#engagements"], ["Selected work", "#work"], ["Approach", "#approach"], ["Studio", "#studio"]];
   return (
     <header className="site-header">
       <nav className="nav-shell" aria-label="Main navigation">
@@ -101,6 +101,53 @@ function Services() {
   </section>;
 }
 
+
+function Engagements() {
+  const offers = [
+    {
+      n: "01",
+      type: "START HERE",
+      title: "Data & Feasibility Sprint",
+      duration: "5–7 working days",
+      description: "A focused assessment before you invest in a larger build.",
+      deliverables: ["Review of one defined dataset or workflow", "Data quality, gaps and technical risks", "Feasibility assessment and recommended approach", "Written scope for the next implementation phase"],
+      outcome: "A decision-ready technical brief — proceed, change direction or stop."
+    },
+    {
+      n: "02",
+      type: "BUILD A PROOF",
+      title: "Applied Prototype Sprint",
+      duration: "2–4 weeks · scoped",
+      description: "Test one important technical assumption with a bounded prototype.",
+      deliverables: ["Agreed prototype or analytical workflow", "Baseline evaluation against defined criteria", "Reproducible code and technical notes", "Limitations, handover and next-step plan"],
+      outcome: "Evidence about whether an approach works under the agreed test conditions."
+    },
+    {
+      n: "03",
+      type: "WORK WITH YOUR TEAM",
+      title: "Technical Delivery Partnership",
+      duration: "Milestone-based",
+      description: "A clearly scoped contribution inside a partner’s larger project.",
+      deliverables: ["Python data processing or backend/API work", "Agricultural data and technical analysis", "Model evaluation or integration support", "Documented handover against acceptance criteria"],
+      outcome: "A dependable, well-defined work package — not an open-ended capacity promise."
+    }
+  ];
+  return <section className="section-wrap section-block engagement-block" id="engagements">
+    <div className="section-intro">
+      <div><div className="section-kicker">02 / WAYS TO WORK TOGETHER</div><h2>Start with a decision.<br/><em>Scale with evidence.</em></h2></div>
+      <p>Three engagement paths cover the most useful starting points: understand the problem, test an approach, or add a defined capability to an existing delivery team.</p>
+    </div>
+    <div className="engagement-grid">{offers.map(o=><article className="engagement-card" key={o.n}>
+      <div className="engagement-top"><span>{o.n} / {o.type}</span><span>{o.duration}</span></div>
+      <h3>{o.title}</h3><p className="engagement-description">{o.description}</p>
+      <div className="engagement-label">TYPICAL DELIVERABLES</div>
+      <ul>{o.deliverables.map(d=><li key={d}><Check size={14}/>{d}</li>)}</ul>
+      <div className="engagement-outcome"><strong>Outcome</strong><p>{o.outcome}</p></div>
+    </article>)}</div>
+    <p className="engagement-footnote">Every engagement is individually qualified and quoted. Timelines depend on data access, dependencies and agreed scope. Production deployment, field validation, certification and specialist work are included only when explicitly scoped.</p>
+  </section>;
+}
+
 function Work() {
   return <section className="work-section" id="work"><div className="section-wrap">
     <div className="section-intro work-intro">
@@ -176,7 +223,8 @@ function FAQ() {
     ["What kind of work does Varia take on?", "Varia works across applied agricultural technology: research and feasibility, data and AI workflows, geospatial and sensing applications, software development, and collaboration with specialist partners. The exact scope depends on the problem and the expertise required."],
     ["Are you an established agency with a large team?", "No. Varia is an independent founder-led studio with a collaborative model. Specialist partners are brought in transparently when a project needs additional expertise or delivery capacity."],
     ["Do you have customer case studies?", "Varia has not yet published paid customer case studies. The work shown here is clearly labeled as internal prototype or research work. Customer outcomes will only be published with permission and supporting evidence."],
-    ["How do projects get priced?", "We use a scoped project fee based on the problem, data, complexity, deliverables and timeline. If the problem is not yet clear, the first step can be a paid diagnostic rather than an open-ended estimate."],
+    ["How do projects get priced?", "We use a scoped project fee based on the problem, data, complexity, deliverables and timeline. The Data & Feasibility Sprint is the usual starting point when the work is not yet clear. A written quote follows a short fit discussion."],
+    ["Where is Varia based?", "Varia is founder-led and based in Iran. International enquiries are welcome, but each engagement is accepted only after applicable legal, client, contracting and payment-provider eligibility has been checked."],
     ["Can you work with confidential data?", "We first agree the data required, permitted use, access controls, retention and transfer method. Please do not email sensitive datasets or personal information before those arrangements are agreed."],
     ["Do you sell Varia Vision or Varia Carbon as production products?", "Not currently. Vision is an experimental computer-vision prototype; Carbon is a research prototype undergoing evidence review. We do not position either as a validated production or MRV product."]
   ];
@@ -189,15 +237,15 @@ function Contact() {
     <div className="contact-copy"><div className="section-kicker">07 / START A PROJECT</div><h2>Bring us the<br/><em>hard part.</em></h2><p>Tell us what is not working, what data you have and what needs to happen next. We will respond with a practical first step — or tell you honestly if it is not a fit.</p>
       <a className="button button-primary" href={mailto("Project enquiry — Varia Studio", body)}>Discuss a project <Mail size={16}/></a>
     </div>
-    <div className="contact-aside"><span>DIRECT CONTACT</span><a href={`mailto:${email}`}>{email}<ArrowUpRight size={15}/></a><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={15}/></a><div className="contact-rule"/><p>Independent studio<br/>Remote-first · International projects</p><small>Please do not send confidential files before a secure transfer method is agreed.</small></div>
+    <div className="contact-aside"><span>DIRECT CONTACT</span><a href={`mailto:${email}`}>{email}<ArrowUpRight size={15}/></a><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={15}/></a><div className="contact-rule"/><p>Independent studio<br/>Based in Iran · International enquiries subject to eligibility</p><small>Please do not send confidential files before a secure transfer method is agreed.</small></div>
   </div></section>;
 }
 
 function Footer() {
-  return <footer className="footer"><div className="section-wrap footer-inner"><Brand/><span>Applied AI & geospatial engineering for agriculture, soil and the environment.</span><span>© {new Date().getFullYear()} Varia Studio</span><a href="#top">Back to top ↑</a></div></footer>;
+  return <footer className="footer"><div className="section-wrap footer-inner"><Brand/><span>Applied agricultural technology · Research · Data · Software</span><span>© {new Date().getFullYear()} Varia Studio</span><a href="#top">Back to top ↑</a></div></footer>;
 }
 
 export default function App() {
   if (window.location.pathname === "/workflow-friction-index" || window.location.pathname === "/workflow-friction-index/") return <WorkflowFriction />;
-  return <><Navbar/><main><Hero/><CapabilityStrip/><Services/><Work/><WhoWeHelp/><Approach/><Studio/><FAQ/><Contact/></main><Footer/></>;
+  return <><Navbar/><main><Hero/><CapabilityStrip/><Services/><Engagements/><Work/><WhoWeHelp/><Approach/><Studio/><FAQ/><Contact/></main><Footer/></>;
 }
