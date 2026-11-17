@@ -42,3 +42,22 @@
 }
 @media(max-width:420px){.work-card{grid-template-columns:1fr}.work-visual{min-height:180px}.work-content{min-height:250px}.service-card ul{grid-template-columns:1fr}.visual-core{height:265px}.orbit-one{width:180px;height:180px}.orbit-two{width:245px;height:125px}.orbit-three{width:290px;height:220px}.orbit-label{font-size:5px}.hero-bottom{letter-spacing:.08em}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Productized engagement paths */
+.engagement-block{padding-top:24px}
+.engagement-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:42px}
+.engagement-card{display:flex;flex-direction:column;min-height:100%;padding:25px 23px;background:linear-gradient(145deg,#131b15,#0d130f);border:1px solid var(--line)}
+.engagement-top{display:flex;justify-content:space-between;gap:10px;color:var(--gold);font-size:8px;letter-spacing:.12em}
+.engagement-top span:last-child{color:var(--muted);letter-spacing:.04em;text-align:right}
+.engagement-card h3{margin:30px 0 10px;color:var(--cream);font-family:var(--font-display);font-size:23px;font-weight:500;line-height:1.2}
+.engagement-description{min-height:48px;margin:0 0 25px;color:var(--muted);font-size:10px;line-height:1.8}
+.engagement-label{padding-top:17px;border-top:1px solid var(--line);color:#8d9b8c;font-size:7px;letter-spacing:.14em}
+.engagement-card ul{display:grid;gap:11px;margin:17px 0 25px;padding:0;list-style:none}
+.engagement-card li{display:flex;align-items:flex-start;gap:8px;color:#c6d0c4;font-size:9px;line-height:1.6}
+.engagement-card li svg{flex:none;margin-top:1px;color:var(--gold)}
+.engagement-outcome{margin-top:auto;padding:14px;background:#1a241c;border:1px solid rgba(212,162,76,.14)}
+.engagement-outcome strong{color:var(--gold);font-size:8px;letter-spacing:.1em;text-transform:uppercase}
+.engagement-outcome p{margin:7px 0 0;color:var(--cream);font-size:9px;line-height:1.7}
+.engagement-footnote{max-width:850px;margin:20px 0 0;color:#899486;font-size:8px;line-height:1.8}
+@media(max-width:1000px){.engagement-grid{grid-template-columns:1fr 1fr}.engagement-card:last-child{grid-column:1/-1}}
+@media(max-width:700px){.engagement-grid{grid-template-columns:1fr;margin-top:28px}.engagement-card:last-child{grid-column:auto}.engagement-card{padding:21px}.engagement-card h3{margin-top:22px}.engagement-description{min-height:0}}
