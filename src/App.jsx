@@ -22,7 +22,7 @@ function Brand() {
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const links = [["Services", "#services"], ["Selected work", "#work"], ["Approach", "#approach"], ["Studio", "#studio"]];
+  const links = [["Capabilities", "#services"], ["Selected work", "#work"], ["Approach", "#approach"], ["Studio", "#studio"]];
   return (
     <header className="site-header">
       <nav className="nav-shell" aria-label="Main navigation">
