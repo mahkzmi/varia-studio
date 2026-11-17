@@ -1,13 +1,19 @@
 # Varia Studio
 
-Varia Studio is an independent, founder-led applied AI and geospatial engineering studio focused on agriculture, soil and environmental data.
+Varia Studio is an independent applied agricultural technology studio connecting agricultural science, research, data, AI and software.
 
 ## Positioning
-The studio works with AgTech product teams, drone and geospatial firms, and soil/environment consultancies on scoped technical engagements involving:
+The studio works with agricultural businesses, AgTech companies, research institutions and technology partners through three engagement paths: a Data & Feasibility Sprint, an Applied Prototype Sprint, and milestone-based Technical Delivery Partnerships. Its work may involve:
 - Computer vision and machine-learning evaluation/integration
 - Geospatial data engineering and remote-sensing workflows
 - Soil and environmental data pipelines
 - Backend APIs, dashboards and decision-support software
+
+## Engagement principles
+- Start with a bounded paid assessment when the problem or data readiness is uncertain.
+- Define deliverables, acceptance criteria, timeline, fee, assumptions and exclusions before implementation.
+- Do not promise field validation, production readiness or model performance without evidence.
+- Varia is founder-led and based in Iran. International engagements require case-by-case legal, client and payment-provider eligibility checks.
 
 Varia Vision and Varia Carbon are internal technical assets at different validation stages. They are not represented as independently field-validated production products.
 
