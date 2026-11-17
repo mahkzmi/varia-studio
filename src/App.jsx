@@ -89,8 +89,8 @@ const services = [
 function Services() {
   return <section className="section-wrap section-block services-block" id="services">
     <div className="section-intro">
-      <div><div className="section-kicker">01 / WHAT WE DO</div><h2>Engineering that starts<br/><em>with the real problem.</em></h2></div>
-      <p>One focused technical partner for teams that need to make data useful — without hiring an entire specialist team or committing to a black-box solution.</p>
+      <div><div className="section-kicker">01 / WHAT WE DO</div><h2>From scientific insight<br/><em>to practical technology.</em></h2></div>
+      <p>Varia works across the agricultural technology lifecycle: understanding challenges, researching approaches, developing and testing solutions, and helping move useful technology into real workflows.</p>
     </div>
     <div className="service-grid">{services.map(s => <article className="service-card" key={s.number}>
       <div className="service-card-top"><span>{s.number}</span><div>{s.icon}</div></div>
@@ -135,13 +135,13 @@ function Work() {
 
 function WhoWeHelp() {
   const audiences = [
-    { icon: <Globe2/>, title: "AgTech product teams", text: "Adding an analytics, ML or data capability to an existing product." },
-    { icon: <MapPinned/>, title: "Drone & geospatial firms", text: "Turning captured imagery and spatial data into a useful customer deliverable." },
-    { icon: <Sprout/>, title: "Soil & environment consultancies", text: "Connecting field data, scientific context and repeatable digital workflows." }
+    { icon: <Globe2/>, title: "Agricultural businesses & AgTech companies", text: "Developing digital capabilities, improving workflows or exploring a technology opportunity." },
+    { icon: <MapPinned/>, title: "Research & knowledge institutions", text: "Connecting scientific questions, data and practical technology development." },
+    { icon: <Sprout/>, title: "Technology & implementation partners", text: "Combining complementary expertise to deliver useful solutions for agriculture." }
   ];
   return <section className="section-wrap section-block audience-block">
     <div className="section-kicker">03 / WHO WE WORK WITH</div>
-    <div className="audience-layout"><h2>For teams with data<br/><em>and a reason to use it.</em></h2>
+    <div className="audience-layout"><h2>Across the agricultural<br/><em>technology ecosystem.</em></h2>
       <div className="audience-list">{audiences.map(a=><article key={a.title}><div>{a.icon}</div><section><h3>{a.title}</h3><p>{a.text}</p></section><ArrowUpRight size={16}/></article>)}</div>
     </div>
   </section>;
@@ -163,9 +163,9 @@ function Approach() {
 function Studio() {
   return <section className="section-wrap section-block studio-block" id="studio">
     <div className="studio-identity"><div className="studio-monogram">V<span>.</span></div><div className="studio-identity-foot"><span>INDEPENDENT</span><span>FOUNDER-LED</span></div></div>
-    <div className="studio-copy"><div className="section-kicker">05 / THE STUDIO</div><h2>Scientific thinking.<br/><em>Engineering discipline.</em></h2>
-      <p>Varia Studio is an independent, founder-led applied AI and software studio founded by Mahdieh Kazemi. Its work connects soil science, agricultural data, geospatial workflows, machine learning and backend engineering.</p>
-      <p>The studio is intentionally small: senior attention from the first conversation, direct communication with the person building the work, and a clear record of what is known, what is uncertain and what has been delivered.</p>
+    <div className="studio-copy"><div className="section-kicker">05 / THE STUDIO</div><h2>Scientific thinking.<br/><em>Technology in practice.</em></h2>
+      <p>Varia Studio is an independent applied agricultural technology studio founded by Mahdieh Kazemi. It brings together agricultural science, research, data, AI and software to address challenges across modern agriculture.</p>
+      <p>Varia’s ambition is to help develop useful technology, adapt promising approaches to real agricultural contexts, and connect expertise across research and industry. The studio starts lean and works with specialist collaborators when a project requires capabilities beyond its in-house scope.</p>
       <a className="text-link" href={linkedin} target="_blank" rel="noreferrer">Connect with the founder <ArrowUpRight size={15}/></a>
     </div>
   </section>;
@@ -173,7 +173,8 @@ function Studio() {
 
 function FAQ() {
   const items = [
-    ["What kind of work does Varia take on?", "Varia works across applied agricultural technology: research and feasibility, data and AI workflows, geospatial and sensing applications, software development, and collaboration with specialist partners. The exact scope depends on the problem and the expertise required."],\n    ["Are you an established agency with a large team?", "No. Varia is an independent founder-led studio with a collaborative model. Specialist partners are brought in transparently when a project needs additional expertise or delivery capacity."],
+    ["What kind of work does Varia take on?", "Varia works across applied agricultural technology: research and feasibility, data and AI workflows, geospatial and sensing applications, software development, and collaboration with specialist partners. The exact scope depends on the problem and the expertise required."],
+    ["Are you an established agency with a large team?", "No. Varia is an independent founder-led studio with a collaborative model. Specialist partners are brought in transparently when a project needs additional expertise or delivery capacity."],
     ["Do you have customer case studies?", "Varia has not yet published paid customer case studies. The work shown here is clearly labeled as internal prototype or research work. Customer outcomes will only be published with permission and supporting evidence."],
     ["How do projects get priced?", "We use a scoped project fee based on the problem, data, complexity, deliverables and timeline. If the problem is not yet clear, the first step can be a paid diagnostic rather than an open-ended estimate."],
     ["Can you work with confidential data?", "We first agree the data required, permitted use, access controls, retention and transfer method. Please do not email sensitive datasets or personal information before those arrangements are agreed."],
