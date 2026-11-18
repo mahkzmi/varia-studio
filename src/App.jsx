@@ -46,7 +46,7 @@ function Hero() {
     <section className="hero section-wrap" id="top">
       <div className="hero-copy">
         <div className="eyebrow"><span className="eyebrow-dot" /> APPLIED AGRICULTURAL TECHNOLOGY STUDIO <span className="eyebrow-rule" /></div>
-        <p className="hero-overline">SCIENCE · DATA · SOFTWARE · FIELD SYSTEMS</p>
+        <p className="hero-overline">AGRICULTURAL SCIENCE · DATA · SOFTWARE · INTEGRATION</p>
         <h1>Technology for<br/><em>agriculture’s next chapter.</em></h1>
         <p className="hero-lead">Varia Studio is an independent applied agricultural technology studio. We connect scientific understanding, data, AI and software to help solve real agricultural challenges — from research and prototyping to practical digital systems and international collaboration.</p>
         <div className="hero-actions">
@@ -81,7 +81,7 @@ function CapabilityStrip() {
 
 const services = [
   { icon: <Sprout/>, number: "01", title: "Agricultural intelligence", intro: "Bring agricultural science and data together to support better analysis and decisions.", points: ["Soil, crop and environmental data", "Analytical and predictive workflows", "Decision-support prototypes"] },
-  { icon: <MapPinned/>, number: "02", title: "Sensing & geospatial systems", intro: "Connect field observations, imagery, sensors and location-based information.", points: ["Remote-sensing and spatial workflows", "Computer vision and sensor data", "Geospatial data integration"] },
+  { icon: <MapPinned/>, number: "02", title: "Field data & spatial applications", intro: "Connect field observations, imagery and sensor data to agricultural workflows, with specialist support where advanced spatial engineering is required.", points: ["Satellite and field-data assessment", "Computer vision and sensor-data prototypes", "Spatial-data integration with specialist partners"] },
   { icon: <Layers3/>, number: "03", title: "Research & technology development", intro: "Explore, prototype and evaluate approaches to complex agricultural problems.", points: ["Technical research and feasibility", "Prototyping and model evaluation", "Testing assumptions with real data"] },
   { icon: <Workflow/>, number: "04", title: "Digital products & integration", intro: "Turn validated ideas into useful software components and connected workflows.", points: ["Backend services and APIs", "Data platforms and decision tools", "Technology integration with partners"] }
 ];
@@ -97,7 +97,7 @@ function Services() {
       <h3>{s.title}</h3><p className="service-intro">{s.intro}</p>
       <ul>{s.points.map(p => <li key={p}><Check size={14}/>{p}</li>)}</ul>
     </article>)}</div>
-    <div className="services-note"><ShieldCheck size={17}/><p>Every engagement is scoped around your data, workflow and acceptance criteria. We do not promise model performance before testing the conditions it will face.</p></div>
+    <div className="services-note"><ShieldCheck size={17}/><p>Every engagement is scoped around your data, workflow and acceptance criteria. We do not promise model performance before testing the conditions it will face. Advanced production geospatial infrastructure, SAR/radar engineering and production ML require qualified specialist partners.</p></div>
   </section>;
 }
 
@@ -151,7 +151,7 @@ function Engagements() {
 function Work() {
   return <section className="work-section" id="work"><div className="section-wrap">
     <div className="section-intro work-intro">
-      <div><div className="section-kicker">02 / SELECTED TECHNICAL WORK</div><h2>Built, tested<br/><em>and still being questioned.</em></h2></div>
+      <div><div className="section-kicker">03 / SELECTED TECHNICAL WORK</div><h2>Built, tested<br/><em>and still being questioned.</em></h2></div>
       <p>These are studio-built technical assets, not customer case studies. We distinguish internal benchmarks from independent or field validation — and publish only what the evidence supports.</p>
     </div>
     <div className="work-grid">
@@ -187,7 +187,7 @@ function WhoWeHelp() {
     { icon: <Sprout/>, title: "Technology & implementation partners", text: "Combining complementary expertise to deliver useful solutions for agriculture." }
   ];
   return <section className="section-wrap section-block audience-block">
-    <div className="section-kicker">03 / WHO WE WORK WITH</div>
+    <div className="section-kicker">04 / WHO WE WORK WITH</div>
     <div className="audience-layout"><h2>Across the agricultural<br/><em>technology ecosystem.</em></h2>
       <div className="audience-list">{audiences.map(a=><article key={a.title}><div>{a.icon}</div><section><h3>{a.title}</h3><p>{a.text}</p></section><ArrowUpRight size={16}/></article>)}</div>
     </div>
@@ -202,7 +202,7 @@ function Approach() {
     ["04", "Build, test and hand over", "You receive working outputs, limitations, documentation and a clear recommendation for what comes next."]
   ];
   return <section className="approach-section" id="approach"><div className="section-wrap">
-    <div className="section-intro"><div><div className="section-kicker">04 / HOW WE WORK</div><h2>Small enough to start.<br/><em>Clear enough to trust.</em></h2></div><p>No open-ended experiments. No mystery scope. A first engagement should create useful evidence for both sides.</p></div>
+    <div className="section-intro"><div><div className="section-kicker">05 / HOW WE WORK</div><h2>Small enough to start.<br/><em>Clear enough to trust.</em></h2></div><p>No open-ended experiments. No mystery scope. A first engagement should create useful evidence for both sides.</p></div>
     <div className="steps-grid">{steps.map(([n,t,d])=><article key={n}><span>{n}</span><div className="step-line"/><h3>{t}</h3><p>{d}</p></article>)}</div>
   </div></section>;
 }
@@ -210,7 +210,7 @@ function Approach() {
 function Studio() {
   return <section className="section-wrap section-block studio-block" id="studio">
     <div className="studio-identity"><div className="studio-monogram">V<span>.</span></div><div className="studio-identity-foot"><span>INDEPENDENT</span><span>FOUNDER-LED</span></div></div>
-    <div className="studio-copy"><div className="section-kicker">05 / THE STUDIO</div><h2>Scientific thinking.<br/><em>Technology in practice.</em></h2>
+    <div className="studio-copy"><div className="section-kicker">06 / THE STUDIO</div><h2>Scientific thinking.<br/><em>Technology in practice.</em></h2>
       <p>Varia Studio is an independent applied agricultural technology studio founded by Mahdieh Kazemi. It brings together agricultural science, research, data, AI and software to address challenges across modern agriculture.</p>
       <p>Varia’s ambition is to help develop useful technology, adapt promising approaches to real agricultural contexts, and connect expertise across research and industry. The studio starts lean and works with specialist collaborators when a project requires capabilities beyond its in-house scope.</p>
       <a className="text-link" href={linkedin} target="_blank" rel="noreferrer">Connect with the founder <ArrowUpRight size={15}/></a>
@@ -228,13 +228,13 @@ function FAQ() {
     ["Can you work with confidential data?", "We first agree the data required, permitted use, access controls, retention and transfer method. Please do not email sensitive datasets or personal information before those arrangements are agreed."],
     ["Do you sell Varia Vision or Varia Carbon as production products?", "Not currently. Vision is an experimental computer-vision prototype; Carbon is a research prototype undergoing evidence review. We do not position either as a validated production or MRV product."]
   ];
-  return <section className="section-wrap section-block faq-block"><div><div className="section-kicker">06 / QUESTIONS</div><h2>Clear answers<br/><em>before we begin.</em></h2></div><div className="faq-list">{items.map(([q,a])=><details key={q}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</div></section>;
+  return <section className="section-wrap section-block faq-block"><div><div className="section-kicker">07 / QUESTIONS</div><h2>Clear answers<br/><em>before we begin.</em></h2></div><div className="faq-list">{items.map(([q,a])=><details key={q}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</div></section>;
 }
 
 function Contact() {
   const body = "Hello Varia Studio,\n\nI'd like to discuss a project.\n\nOrganisation / role:\nCurrent workflow or problem:\nData available:\nWhat a successful outcome would change:\nTimeline:\n";
   return <section className="contact-section" id="contact"><div className="section-wrap contact-panel">
-    <div className="contact-copy"><div className="section-kicker">07 / START A PROJECT</div><h2>Bring us the<br/><em>hard part.</em></h2><p>Tell us what is not working, what data you have and what needs to happen next. We will respond with a practical first step — or tell you honestly if it is not a fit.</p>
+    <div className="contact-copy"><div className="section-kicker">08 / START A PROJECT</div><h2>Bring us the<br/><em>hard part.</em></h2><p>Tell us what is not working, what data you have and what needs to happen next. We will respond with a practical first step — or tell you honestly if it is not a fit.</p>
       <a className="button button-primary" href={mailto("Project enquiry — Varia Studio", body)}>Discuss a project <Mail size={16}/></a>
     </div>
     <div className="contact-aside"><span>DIRECT CONTACT</span><a href={`mailto:${email}`}>{email}<ArrowUpRight size={15}/></a><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={15}/></a><div className="contact-rule"/><p>Independent studio<br/>Based in Iran · International enquiries subject to eligibility</p><small>Please do not send confidential files before a secure transfer method is agreed.</small></div>
