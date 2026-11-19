@@ -61,3 +61,18 @@
 .engagement-footnote{max-width:850px;margin:20px 0 0;color:#899486;font-size:8px;line-height:1.8}
 @media(max-width:1000px){.engagement-grid{grid-template-columns:1fr 1fr}.engagement-card:last-child{grid-column:1/-1}}
 @media(max-width:700px){.engagement-grid{grid-template-columns:1fr;margin-top:28px}.engagement-card:last-child{grid-column:auto}.engagement-card{padding:21px}.engagement-card h3{margin-top:22px}.engagement-description{min-height:0}}
+
+
+/* Keep keyboard navigation visible without changing pointer interactions. */
+:where(a, button, summary, input, select, textarea, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(212, 162, 76, 0.18);
+}
+
+@media (forced-colors: active) {
+  :where(a, button, summary, input, select, textarea, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible {
+    outline: 2px solid Highlight;
+    box-shadow: none;
+  }
+}
